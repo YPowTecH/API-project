@@ -51,7 +51,7 @@ app.use(routes);
 
 
 
-//checking for update
+//checking for main update
 
 
 module.exports = app;
