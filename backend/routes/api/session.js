@@ -43,7 +43,15 @@ router.post(
     }
   );
 
-
+// Log out
+//clearcookie is built in method
+router.delete(
+    '/',
+    (_req, res) => {
+      res.clearCookie('token');
+      return res.json({ message: 'success' });
+    }
+  );
 
 
 
