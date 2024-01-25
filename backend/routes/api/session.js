@@ -54,7 +54,25 @@ router.delete(
   );
 
 
-
+// Restore session user route
+//checking to see if we have a user on our req. obj
+//if we passed through the restore user global middleware and found a user identified by the jwt and applied that user to the req obj,
+router.get(
+    '/',
+    (req, res) => {
+      const { user } = req;
+      if (user) {
+        const safeUser = {
+          id: user.id,
+          email: user.email,
+          username: user.username,
+        };
+        return res.json({
+          user: safeUser
+        });
+      } else return res.json({ user: null });
+    }
+  );
 
 
 
