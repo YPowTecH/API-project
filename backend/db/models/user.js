@@ -24,15 +24,15 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       },
-      firstName:{
-        type: DataTypes.STRING(20),
+      firstname:{
+        type: DataTypes.STRING,
         allowNull: false,
         validate:{
           isAlphanumeric: true,
         }
       },
-      lastName:{
-        type: DataTypes.STRING(30),
+      lastname:{
+        type: DataTypes.STRING,
         allowNull: false,
         validate:{
           isAlphanumeric: true,
