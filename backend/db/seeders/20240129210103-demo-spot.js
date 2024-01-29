@@ -1,11 +1,11 @@
 'use strict';
+
+/** @type {import('sequelize-cli').Migration} */
 const { Spot } = require('../models')
 let options = {}
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
-
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**
@@ -68,7 +68,7 @@ module.exports = {
       },
       {
         ownerId: 5,
-        address: 'Consecrated Ground',
+        address: 'North of Consecrated Ground',
         city: 'Ordina',
         state: 'Consecrated Snowfield',
         country: 'Lands Between',
@@ -100,5 +100,9 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    const Op = Sequelize.Op
+    return queryInterface.bulkDelete(options, {
+      ownerId: { [Op.in]: [1,2,3,4,5,6]}
+    })
   }
 };
