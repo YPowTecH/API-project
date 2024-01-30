@@ -37,6 +37,45 @@ check('price')
     .withMessage("Price per day must be a positive number")
 ]
 
-router.get(
-    '/'
-)
+const validateReviews = [
+check('review')
+    .exists({ checkFalsy: true})
+    .withMessage("Review text is required"),
+check('stars')
+    .exists({ checkFalsy: true})
+    .withMessage("Stars must be an integer from 1 to 5")
+]
+
+//Add query filters to get all spots
+const validateQueryFilter = [
+
+]
+
+router.get('/', validateQueryFilter, async(req, res)=>{
+    const spots = await Spot.findAll()
+    let avgRating
+    for(let i=0; i<spots.length;i++){
+        let reviews = await Review.count({
+            where:{
+                spotId: spots[i].id
+            }
+        })
+        let stars = await Review.sum('stars', {
+            where:{
+                spotId: spots[i].id
+            }
+        })
+    if(stars===null){
+        avgRating = 0
+    }else{
+        avgRating = totalStars / reviews
+    }
+
+    spots[i].setDataValue('avgRating', avgRating)
+
+    }
+
+    res.json({
+        Spot: spots,
+    })
+})
