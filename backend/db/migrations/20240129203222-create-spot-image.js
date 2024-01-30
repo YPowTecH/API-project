@@ -41,6 +41,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
+    options.tableName = "SpotImages"
     return queryInterface.dropTable(options);
   }
 };
