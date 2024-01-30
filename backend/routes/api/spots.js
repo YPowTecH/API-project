@@ -51,8 +51,9 @@ const validateQueryFilter = [
 
 ]
 
-router.get('/', validateQueryFilter, async(req, res)=>{
+router.get('/', async(req, res)=>{
     const spots = await Spot.findAll()
+    //avgstarrating
     let avgRating
     for(let i=0; i<spots.length;i++){
         let reviews = await Review.count({
@@ -68,16 +69,34 @@ router.get('/', validateQueryFilter, async(req, res)=>{
     if(stars===null){
         avgRating = 0
     }else{
-        avgRating = totalStars / reviews
+        avgRating = stars / reviews
     }
 
     spots[i].setDataValue('avgRating', avgRating)
 
+        //previewimgurl
+        const imgurl = await SpotImage.findOne({
+            where:{
+                spotId: spots[i].id
+            }
+        })
+
+        if(imgurl===null){
+            spots[i].setDataValue('previewImage', null)
+        }else{
+            spots[i].setDataValue('previewImage', imgurl.url)
+        }
+
     }
 
     res.json({
-        Spot: spots,
+        Spots: spots,
     })
 })
+
+router.get('/current', async (req, res)=>{
+    
+})
+
 
 module.exports = router
