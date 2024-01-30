@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 const { Booking } = require('../models')
-let options = {};
+let options = { tableName: 'Bookings' };
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
@@ -54,7 +54,7 @@ module.exports = {
       startDate:'2-26-24',
       endDate:'3-2-24'
     },
-    ], { validate: true })
+    ], options, { validate: true })
   },
 
   async down (queryInterface, Sequelize) {

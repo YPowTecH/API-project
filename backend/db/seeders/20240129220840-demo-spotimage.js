@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 const { SpotImage } = require('../models')
-let options = {};
+let options = { tableName: 'SpotImages'};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
@@ -49,7 +49,7 @@ module.exports = {
         preview: true
       }
 
-    ], { validate: true})
+    ], options, { validate: true})
   },
 
   async down (queryInterface, Sequelize) {

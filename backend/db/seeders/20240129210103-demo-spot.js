@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 const { Spot } = require('../models')
-let options = {}
+let options = { tableName: 'Spots'}
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
@@ -90,7 +90,7 @@ module.exports = {
         description: 'An ancient city punished for high treason against the Greater Will',
         price: 500.99
       },
-    ], { validate: true})
+    ], options, { validate: true})
   },
 
   async down (queryInterface, Sequelize) {

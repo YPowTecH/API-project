@@ -1,7 +1,7 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 const { Review } = require('../models')
-let options = {}
+let options = { tableName: 'Reviews'}
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
@@ -16,7 +16,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await Spot.bulkCreate([
+    await Review.bulkCreate([
     {
       spotId:1,
       userId:1,
@@ -41,7 +41,7 @@ module.exports = {
       review: 'It\'s really really cold. Make sure you are well prepared.',
       stars: 2
     },
-  ], { validate: true})
+  ], options, { validate: true})
   },
 
   async down (queryInterface, Sequelize) {

@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 const { ReviewImage } = require('../models')
-let options = {}
+let options = { tableName: 'ReviewImages'}
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
@@ -35,7 +35,7 @@ module.exports = {
         url:'https://imgur.com/a/pqvOPxi'
       }
 
-    ], { validate: true})
+    ], options, { validate: true})
   },
 
   async down (queryInterface, Sequelize) {
