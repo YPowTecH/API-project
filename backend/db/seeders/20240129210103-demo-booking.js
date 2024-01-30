@@ -21,38 +21,38 @@ module.exports = {
       {
       spotId:1,
       userId:1,
-      startDate:'1-29-24',
-      endDate:'2-10-24'
+      startDate:'2024-01-29',
+      endDate:'2024-02-10'
     },
     {
       spotId:2,
       userId:2,
-      startDate:'2-10-24',
-      endDate:'2-17-24'
+      startDate:'2024-02-10',
+      endDate:'2024-02-17'
     },
     {
       spotId:3,
       userId:3,
-      startDate:'2-10-24',
-      endDate:'2-05-24'
+      startDate:'2024-02-10',
+      endDate:'2024-02-05'
     },
     {
       spotId:4,
-      userId:4,
-      startDate:'2-20-24',
-      endDate:'2-26-24'
+      userId:1,
+      startDate:'2024-02-20',
+      endDate:'2024-02-26'
     },
     {
       spotId:5,
-      userId:5,
-      startDate:'2-26-24',
-      endDate:'3-2-24'
+      userId:2,
+      startDate:'2024-02-26',
+      endDate:'2024-03-24'
     },
     {
       spotId:6,
-      userId:6,
-      startDate:'2-26-24',
-      endDate:'3-2-24'
+      userId:3,
+      startDate:'2024-02-26',
+      endDate:'2024-03-24'
     },
     ], options, { validate: true })
   },

@@ -55,7 +55,7 @@ module.exports = {
         price: 999.99
       },
       {
-        ownerId: 4,
+        ownerId: 2,
         address: 'Foot of the Erdtree',
         city: 'Royal Capital',
         state: 'Leyndell',
@@ -67,7 +67,7 @@ module.exports = {
         price: 150.99
       },
       {
-        ownerId: 5,
+        ownerId: 1,
         address: 'North of Consecrated Ground',
         city: 'Ordina',
         state: 'Consecrated Snowfield',
@@ -79,7 +79,7 @@ module.exports = {
         price: 1.99
       },
       {
-        ownerId: 6,
+        ownerId: 3,
         address: 'Above the Siofra River',
         city: 'Eternal City',
         state: 'Underground',

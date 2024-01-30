@@ -30,8 +30,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
+  }, {
     sequelize,
-    modelName: 'Booking',
-  });
+    modelName: 'Booking',}
+  );
   return Booking;
 };
