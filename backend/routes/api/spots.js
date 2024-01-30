@@ -1,6 +1,6 @@
 const express = require('express')
 const { Spot, SpotImage, Review, User, Booking, ReviewImage } = require ('../../db/models')
-const { requireAuth } = require('../../utils/auth');
+const { requireAuth, restoreUser } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation')
 const { Op } = require('sequelize');
 const { check } = require('express-validator');
@@ -50,6 +50,96 @@ check('stars')
 const validateQueryFilter = [
 
 ]
+//how to check when requiresAuth
+router.get('/current', requireAuth, async (req, res)=>{
+    const ownerId = req.user.id
+    const spots = await Spot.findAll({
+        where:{
+            ownerId: ownerId
+        }
+    })
+        //avgstarrating
+        let avgRating
+        for(let i=0; i<spots.length;i++){
+            let reviews = await Review.count({
+                where:{
+                    spotId: spots[i].id
+                }
+            })
+            let stars = await Review.sum('stars', {
+                where:{
+                    spotId: spots[i].id
+                }
+            })
+        if(stars===null){
+            avgRating = 0
+        }else{
+            avgRating = stars / reviews
+        }
+
+        spots[i].setDataValue('avgRating', avgRating)
+
+            //previewimgurl
+            const imgurl = await SpotImage.findOne({
+                where:{
+                    spotId: spots[i].id
+                }
+            })
+
+            if(imgurl===null){
+                spots[i].setDataValue('previewImage', null)
+            }else{
+                spots[i].setDataValue('previewImage', imgurl.url)
+            }
+
+        }
+
+        res.json({
+            Spots: spots,
+        })
+})
+
+
+router.get('/:spotId', async(req, res)=>{
+    const { spotId } = req.params
+    const spot = await Spot.findByPk(spotId)
+
+    if(!spot){
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+
+    //numreviews, avgstaarrating,spotimages[],owner
+
+    const numReviews = await Review.count({
+        where: {
+            spotId: spotId
+        }
+    })
+
+    const stars = await Review.sum('stars',{
+        where:{
+            spotId: spotId
+        }
+    })
+
+    let avgRating
+    if(stars===null){
+        avgRating = 0
+    }else{
+        avgRating = stars / numReviews
+    }
+
+
+    spot.numReviews = numReviews
+    spot.avgStarRating = avgRating
+    // respbody.
+    // respbody.
+
+    res.json(spot)
+})
+
 
 router.get('/', async(req, res)=>{
     const spots = await Spot.findAll()
@@ -94,9 +184,6 @@ router.get('/', async(req, res)=>{
     })
 })
 
-router.get('/current', async (req, res)=>{
-    
-})
 
 
 module.exports = router
