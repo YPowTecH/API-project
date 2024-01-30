@@ -79,3 +79,5 @@ router.get('/', validateQueryFilter, async(req, res)=>{
         Spot: spots,
     })
 })
+
+module.exports = router
