@@ -50,7 +50,7 @@ check('stars')
 const validateQueryFilter = [
 
 ]
-//how to check when requiresAuth
+//Get all spots by logged user
 router.get('/current', requireAuth, async (req, res)=>{
     const ownerId = req.user.id
     const spots = await Spot.findAll({
@@ -99,7 +99,7 @@ router.get('/current', requireAuth, async (req, res)=>{
         })
 })
 
-
+// Get Spot details by ID
 router.get('/:spotId', async(req, res)=>{
     const { spotId } = req.params
     const spot = await Spot.findByPk(spotId)
@@ -151,7 +151,27 @@ router.get('/:spotId', async(req, res)=>{
     res.json(spot)
 })
 
+// DESTROY
+router.delete('/:spotId', requireAuth, async (req,res)=>{
+    const { spotId } = req.params
+    let spot = await Spot.findByPk(spotId)
 
+    if(!spot){
+        return res.status(404).json({
+            message:  "Spot couldn't be found"
+        })
+    }
+
+    //need error for when not proper user?
+
+    spot.destroy()
+
+    res.status(200).json({
+        message: "Successfully deleted"
+    })
+})
+
+// Spot Create
 router.post('/', requireAuth, validateSpots, async(req, res)=>{
     const { address,city,state,country,lat,lng,name,description,price } = req.body
 
@@ -172,10 +192,19 @@ router.post('/', requireAuth, validateSpots, async(req, res)=>{
 
 })
 
+// Add an Image to a Spot based on Spot ID
 router.post(':spotid/images', requireAuth, async(res, res)=>{
+    const { url } = req.body
+    const spot = await Spot.findByPk(req.paarams.spotId)
 
+    if(!spot){
+        return res.status(404).json({
+            "message": "Spot couldn't be found"
+        })
+    }
 })
 
+// Get all spots
 router.get('/', async(req, res)=>{
     const spots = await Spot.findAll()
     //avgstarrating
