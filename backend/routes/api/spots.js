@@ -131,14 +131,29 @@ router.get('/:spotId', async(req, res)=>{
         avgRating = stars / numReviews
     }
 
+    const imgurl = await SpotImage.findAll({
+        where:{
+            spotId: spotId
+        }, attributes: ['id', 'url', 'preview']
+    })
 
-    spot.numReviews = numReviews
-    spot.avgStarRating = avgRating
-    // respbody.
-    // respbody.
+    const owner = await User.findByPk(spot.ownerId,{
+        attributes:['id', 'firstname', 'lastname']
+    })
+
+    spot.setDataValue('numReviews', numReviews)
+    spot.setDataValue('avgStarRating', avgRating)
+    spot.setDataValue('SpotImages', imgurl)
+    spot.setDataValue('Owner', owner)
+
+
 
     res.json(spot)
 })
+
+
+
+
 
 
 router.get('/', async(req, res)=>{
