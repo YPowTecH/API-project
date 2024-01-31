@@ -41,7 +41,8 @@ const validateSpots = [
         .withMessage("Description is required"),
     check('price')
         .isFloat({ min: 0 })
-        .withMessage("Price per day must be a positive number")
+        .withMessage("Price per day must be a positive number"),
+    handleValidationErrors
 ]
 
 const validateReviews = [
@@ -50,7 +51,8 @@ const validateReviews = [
         .withMessage("Review text is required"),
     check('stars')
         .exists({ checkFalsy: true })
-        .withMessage("Stars must be an integer from 1 to 5")
+        .withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
 ]
 
 //Add query filters to get all spots
