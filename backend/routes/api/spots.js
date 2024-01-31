@@ -12,18 +12,22 @@ const validateSpots = [
     check('address')
         .exists({ checkFalsy: true })
         .isString()
+        .notEmpty()
         .withMessage('Street Address required'),
     check('city')
         .exists({ checkFalsy: true })
         .isString()
+        .notEmpty()
         .withMessage('City is required'),
     check('state')
         .exists({ checkFalsy: true })
         .isString()
+        .notEmpty()
         .withMessage('State is required'),
     check('country')
         .exists({ checkFalsy: true })
         .isString()
+        .notEmpty()
         .withMessage('Country is required'),
     check('lat')
         .isFloat({ min: -90, max: 90 })
@@ -34,13 +38,16 @@ const validateSpots = [
     check('name')
         .isLength({ max: 49 })
         .isString()
+        .notEmpty()
         .withMessage("Name must be less than 50 characters"),
     check('description')
         .exists({ checkFalsy: true })
         .isString()
+        .notEmpty()
         .withMessage("Description is required"),
     check('price')
         .isFloat({ min: 0 })
+        .notEmpty()
         .withMessage("Price per day must be a positive number"),
     handleValidationErrors
 ]
