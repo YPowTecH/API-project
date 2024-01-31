@@ -172,7 +172,9 @@ router.post('/', requireAuth, validateSpots, async(req, res)=>{
 
 })
 
+router.post(':spotid/images', requireAuth, async(res, res)=>{
 
+})
 
 router.get('/', async(req, res)=>{
     const spots = await Spot.findAll()
