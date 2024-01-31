@@ -127,7 +127,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     }
 
     //proper auth
-    if(req.user.id !== spot.ownerId){
+    if(req.user.id !== spotId.ownerId){
         return res.status(403).json({
             "message": "Spot must belong to the current user"
         })
