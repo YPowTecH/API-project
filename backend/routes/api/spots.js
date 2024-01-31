@@ -114,6 +114,18 @@ router.get('/current', requireAuth, async (req, res) => {
         Spots: spots,
     })
 })
+
+//Get all bookings for a Spot based on Spot's id
+router.get('/:spotId/bookings', requireAuth, async (req, res)=>{
+
+})
+
+
+//create a booking from a spot based on spot's id
+router.post('/:spotId/bookings', requireAuth, async (req, res)=>{
+
+})
+
 // Add an Image to a Spot based on Spot ID
 router.post('/:spotId/images', requireAuth, async (req, res) => {
     const { url, preview } = req.body
