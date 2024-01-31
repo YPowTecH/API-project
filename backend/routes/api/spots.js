@@ -4,21 +4,26 @@ const { requireAuth, restoreUser } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation')
 const { Op } = require('sequelize');
 const { check } = require('express-validator');
+const spot = require('../../db/models/spot');
 
 const router = express.Router()
 
 const validateSpots = [
     check('address')
         .exists({ checkFalsy: true })
+        .isString()
         .withMessage('Street Address required'),
     check('city')
         .exists({ checkFalsy: true })
+        .isString()
         .withMessage('City is required'),
     check('state')
         .exists({ checkFalsy: true })
+        .isString()
         .withMessage('State is required'),
     check('country')
         .exists({ checkFalsy: true })
+        .isString()
         .withMessage('Country is required'),
     check('lat')
         .isFloat({ min: -90, max: 90 })
@@ -28,9 +33,11 @@ const validateSpots = [
         .withMessage("Longitude must be within -180 and 180"),
     check('name')
         .isLength({ max: 49 })
+        .isString()
         .withMessage("Name must be less than 50 characters"),
     check('description')
         .exists({ checkFalsy: true })
+        .isString()
         .withMessage("Description is required"),
     check('price')
         .isFloat({ min: 0 })
@@ -110,6 +117,13 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
         })
     }
 
+    //proper auth
+    if(req.user.id !== spot.ownerId){
+        return res.status(403).json({
+            "message": "Spot must belong to the current user"
+        })
+    }
+
     const spotImage = await SpotImage.create({
         spotId: spotId.id,
         url,
@@ -171,6 +185,60 @@ router.get('/:spotId', async (req, res) => {
     res.json(spot)
 })
 
+//Edit a spot
+router.put('/:spotId', [requireAuth, validateSpots], async (req,res)=>{
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
+
+    const { spotId } = req.params
+    const spot = await Spot.findByPk(spotId)
+
+    if(!spot){
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+
+    //proper auth
+    if(req.user.id !== spot.ownerId){
+        return res.status(403).json({
+            "message": "Spot must belong to the current user"
+        })
+    }
+
+    if(address){
+        spot.address = address
+    }
+    if(city){
+        spot.city = city
+    }
+    if(state){
+        spot.state = state
+    }
+    if(country){
+        spot.country = country
+    }
+    if(lat){
+        spot.lat = lat
+    }
+    if(lng){
+        spot.lng = lng
+    }
+    if(name){
+        spot.name = name
+    }
+    if(description){
+        spot.description = description
+    }
+    if(price){
+        spot.price = price
+    }
+
+    await spot.save()
+
+    res.json(spot)
+
+})
+
 
 // DESTROY
 router.delete('/:spotId', requireAuth, async (req, res) => {
@@ -183,7 +251,12 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
         })
     }
 
-    //need error for when not proper user?
+    //proper auth
+    if(req.user.id !== spot.ownerId){
+        return res.status(403).json({
+            "message": "Spot must belong to the current user"
+        })
+    }
 
     spot.destroy()
 
