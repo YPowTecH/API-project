@@ -6,13 +6,30 @@ const router = express.Router()
 
 //Get all current User's Bookings
 router.get('/current', requireAuth, async (req,res)=>{
+    const userId = req.user.id
     const bookings = await Booking.findAll({
         where: {
-            userId: req.user.id
+            userId: userId
         }
-    })
 
-    
+    })
+    // const spots = await Spot.findAll({
+    //     where: {
+    //         ownerId: ownerId
+    //     }
+    // })
+    // const imgurl = await SpotImage.findOne({
+    //     where: {
+    //         spotId: spots[i].id
+    //     }
+    // })
+
+    // if (imgurl === null) {
+    //     spots[i].setDataValue('previewImage', null)
+    // } else {
+    //     spots[i].setDataValue('previewImage', imgurl.url)
+    // }
+
     res.json({
         Bookings: bookings
     })
@@ -28,3 +45,5 @@ router.put('/:bookingId', requireAuth, async (req,res)=>{
 router.delete('/:bookingId', requireAuth, async (req,res)=>{
 
 })
+
+module.exports = router
