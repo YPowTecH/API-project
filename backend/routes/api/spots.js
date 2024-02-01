@@ -58,8 +58,8 @@ const validateReviews = [
         .withMessage("Review text is required"),
     check('stars')
         .exists({ checkFalsy: true })
-        .withMessage("Stars must be an integer from 1 to 5")
-        .isInt({min: 1, max: 5}),
+        .isInt({ min: 1, max: 5 })
+        .withMessage("Stars must be an integer from 1 to 5"),
     handleValidationErrors
 ]
 
@@ -117,31 +117,80 @@ router.get('/current', requireAuth, async (req, res) => {
 })
 
 //Get all Reviews by a Spot's id
-router.get('/:spotId/reviews', async (req, res)=>{
+router.get('/:spotId/reviews', async (req, res) => {
     const { spotId } = req.params
 
     const spot = await Spot.findByPk(spotId)
 
-    if(!spot){
+    if (!spot) {
         return res.status(404).json({
             message: "Spot couldn't be found"
         })
     }
 
     const allReviews = await Review.findAll({
-        
+        where: {
+            spotId: spotId
+        }, include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: ReviewImage,
+                attributes: ['id', 'url']
+            }
+        ]
     })
+
+    res.json(allReviews)
+})
+
+router.post('/:spotId/reviews', [requireAuth, validateReviews], async (req, res) => {
+    const { review, stars } = req.body
+    const { spotId } = req.params //have to destructure spot and not do it in a single line
+    //const spotId = await Spot.findByPk(req.params.spotId)
+    const spot = await Spot.findByPk(spotId)
+
+    const existReview = await Review.findOne({
+        where: {
+            userId: req.user.id,
+            spotId: spotId
+        }
+    })
+
+    if (!spot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+
+    if (existReview) {
+        return res.status(500).json({
+            message: "User already has a review for this spot"
+        })
+    }
+
+    const post = await Review.create({
+        //returning as a string?
+        spotId: +spotId,
+        userId: req.user.id,
+        review,
+        stars
+    })
+console.log('should be an integer', post)
+    res.status(200).json(post)
 })
 
 
 //Get all bookings for a Spot based on Spot's id
-router.get('/:spotId/bookings', requireAuth, async (req, res)=>{
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 
 })
 
 
 //create a booking from a spot based on spot's id
-router.post('/:spotId/bookings', requireAuth, async (req, res)=>{
+router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
 })
 
@@ -158,14 +207,14 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     }
 
     //proper auth
-    if(req.user.id !== spotId.ownerId){
+    if (req.user.id !== spotId.ownerId) {
         return res.status(403).json({
             "message": "Spot must belong to the current user"
         })
     }
 
     const spotImage = await SpotImage.create({
-        [[spotId, "id"]]: spotId.id,
+        [["spotId", "id"]]: spotId.id,
         url,
         preview,
     })
@@ -184,7 +233,7 @@ router.get('/:spotId', async (req, res) => {
         })
     }
 
-//numreviews, avgstaarrating,spotimages[],owner
+    //numreviews, avgstaarrating,spotimages[],owner
 
     const numReviews = await Review.count({
         where: {
@@ -226,50 +275,50 @@ router.get('/:spotId', async (req, res) => {
 })
 
 //Edit a spot
-router.put('/:spotId', [requireAuth, validateSpots], async (req,res)=>{
+router.put('/:spotId', [requireAuth, validateSpots], async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
 
     const { spotId } = req.params
     const spot = await Spot.findByPk(spotId)
 
-    if(!spot){
+    if (!spot) {
         return res.status(404).json({
             message: "Spot couldn't be found"
         })
     }
 
     //proper auth
-    if(req.user.id !== spot.ownerId){
+    if (req.user.id !== spot.ownerId) {
         return res.status(403).json({
             "message": "Spot must belong to the current user"
         })
     }
 
-    if(address){
+    if (address) {
         spot.address = address
     }
-    if(city){
+    if (city) {
         spot.city = city
     }
-    if(state){
+    if (state) {
         spot.state = state
     }
-    if(country){
+    if (country) {
         spot.country = country
     }
-    if(lat){
+    if (lat) {
         spot.lat = lat
     }
-    if(lng){
+    if (lng) {
         spot.lng = lng
     }
-    if(name){
+    if (name) {
         spot.name = name
     }
-    if(description){
+    if (description) {
         spot.description = description
     }
-    if(price){
+    if (price) {
         spot.price = price
     }
 
@@ -292,7 +341,7 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     }
 
     //proper auth
-    if(req.user.id !== spot.ownerId){
+    if (req.user.id !== spot.ownerId) {
         return res.status(403).json({
             "message": "Spot must belong to the current user"
         })
