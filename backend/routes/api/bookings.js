@@ -53,7 +53,7 @@ router.put('/:bookingId', requireAuth, async (req,res)=>{
 
 })
 
-//delete aa booking
+//delete a booking
 router.delete('/:bookingId', requireAuth, async (req,res)=>{
 
 })
