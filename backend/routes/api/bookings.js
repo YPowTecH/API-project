@@ -10,25 +10,37 @@ router.get('/current', requireAuth, async (req,res)=>{
     const bookings = await Booking.findAll({
         where: {
             userId: userId
-        }
+        }, include: [
+            {
+                model:Spot,
+                attributes:{
+                    exclude: ['description', 'createdAt', 'updatedAt']
+                }
+            }
+        ]
 
     })
-    // const spots = await Spot.findAll({
-    //     where: {
-    //         ownerId: ownerId
-    //     }
-    // })
-    // const imgurl = await SpotImage.findOne({
-    //     where: {
-    //         spotId: spots[i].id
-    //     }
-    // })
 
-    // if (imgurl === null) {
-    //     spots[i].setDataValue('previewImage', null)
-    // } else {
-    //     spots[i].setDataValue('previewImage', imgurl.url)
-    // }
+    for(let i=0; i< bookings.length; i++){
+        let json = bookings[i].toJSON()
+        // console.log(json)
+
+        const previewimage = await SpotImage.findOne({
+            where:{
+                spotId: json.Spot.id,
+                preview: true
+            }
+        })
+        // console.log(previewimage)
+
+        if(previewimage){
+            json.Spot.previewImage = previewimage.url
+        } else {
+            json.Spot.previewImage = null
+        }
+
+        bookings[i] = json
+    }
 
     res.json({
         Bookings: bookings

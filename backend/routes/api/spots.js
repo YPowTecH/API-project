@@ -178,19 +178,63 @@ router.post('/:spotId/reviews', [requireAuth, validateReviews], async (req, res)
         review,
         stars
     })
-// console.log('should be an integer', post)
+    // console.log('should be an integer', post)
     res.status(200).json(post)
 })
 
 
 //Get all bookings for a Spot based on Spot's id
 router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+    const { spotId } = req.params
 
+    const spot = await Spot.findByPk(spotId)
+
+    if (!spot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+
+    //are owner
+    if (req.user.id === spot.ownerId) {
+        const allbookings = await Booking.findAll({
+            where: {
+                spotId: spotId
+            }, include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                },
+            ]
+        })
+        return res.json({
+            Bookings: allbookings
+        })
+
+    }
+    //arent owner
+    if (req.user.id !== spot.ownerId) {
+        const allbookings = await Booking.findAll({
+            where: {
+                spotId: spotId
+            }, attributes: {
+                exclude: ["id", "userId", "createdAt", "updatedAt"]
+            }
+        })
+        return res.json({
+            Bookings: allbookings
+        })
+    }
+
+
+    res.json()
 })
 
 
 //create a booking from a spot based on spot's id
 router.post('/:spotId/bookings', requireAuth, async (req, res) => {
+
+
 
 })
 
@@ -207,7 +251,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     }
 
     //proper auth
-    if(req.user.id !== spotId.ownerId){
+    if (req.user.id !== spotId.ownerId) {
         return res.status(403).json({
             message: "Spot must belong to the current user"
         })
