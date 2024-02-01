@@ -13,10 +13,10 @@ const validateSignup = [
       .exists({ checkFalsy: true })
       .isEmail()
       .withMessage('Please provide a valid email.'),
-    check('firstname')
+    check('firstName')
       .exists({ checkFalsy: true })
       .withMessage('First name must not contain numbers or special characters'),
-    check('lastname')
+    check('lastName')
       .exists({ checkFalsy: true })
       .withMessage('Last name must not contain numbers or special characters'),
     check('username')
@@ -40,14 +40,14 @@ router.post(
     '/',
     validateSignup,
     async (req, res) => {
-      const { firstname, lastname, email, password, username } = req.body; //remember we need to destructure our body
+      const { firstName, lastName, email, password, username } = req.body; //remember we need to destructure our body
       const hashedPassword = bcrypt.hashSync(password);
-      const user = await User.create({ firstname, lastname, email, username, hashedPassword }); //need to create firstname and lastname
+      const user = await User.create({ firstName, lastName, email, username, hashedPassword }); //need to create firstname and lastname
 
       const safeUser = {
         id: user.id,
-        firstname: user.firstname,
-        lastname: user.lastname,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         username: user.username,
       };

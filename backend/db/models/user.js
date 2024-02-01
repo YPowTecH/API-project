@@ -39,14 +39,14 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       },
-      firstname:{
+      firstName:{
         type: DataTypes.STRING,
         allowNull: false,
         validate:{
           isAlphanumeric: true,
         }
       },
-      lastname:{
+      lastName:{
         type: DataTypes.STRING,
         allowNull: false,
         validate:{
