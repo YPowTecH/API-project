@@ -146,6 +146,7 @@ router.get('/:spotId/reviews', async (req, res) => {
     res.json(allReviews)
 })
 
+//create a review
 router.post('/:spotId/reviews', [requireAuth, validateReviews], async (req, res) => {
     const { review, stars } = req.body
     const { spotId } = req.params //have to destructure spot and not do it in a single line
@@ -178,7 +179,7 @@ router.post('/:spotId/reviews', [requireAuth, validateReviews], async (req, res)
         review,
         stars
     })
-console.log('should be an integer', post)
+// console.log('should be an integer', post)
     res.status(200).json(post)
 })
 
@@ -202,14 +203,14 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
 
     if (!spotId) {
         return res.status(404).json({
-            "message": "Spot couldn't be found"
+            message: "Spot couldn't be found"
         })
     }
 
     //proper auth
     if (req.user.id !== spotId.ownerId) {
         return res.status(403).json({
-            "message": "Spot must belong to the current user"
+            message: "Spot must belong to the current user"
         })
     }
 

@@ -19,6 +19,59 @@ const validateReviews = [
     handleValidationErrors
 ]
 
+//Add an Image to a Review based on the Review's id
+router.post('/:reviewId/images', requireAuth, async (req, res)=>{
+    const { reviewId } = req.params
+    const { url } = req.body
+
+    const review = await Review.findByPk(reviewId)
+
+    if(!review){
+        return res.status(404).json({
+            message: "Review couldn't be found"
+        })
+    }
+
+    if(req.user.id !== review.userId){
+        res.status(403).json({
+            message:"Review must belong to the current user"
+        })
+    }
+    //findall instead of findone
+    const existImg = await ReviewImage.findAll({
+        where: {
+            reviewId: reviewId
+        }
+    })
+
+    if(existImg.length >10){
+        return res.status(403).json({
+            message: "Maximum number of images for this resource was reached"
+        })
+    }
+
+    const resp = await ReviewImage.create({
+        reviewId: reviewId,
+        url
+    })
+
+    res.json({
+        id: resp.id,
+        url: resp.url
+    })
+})
+
+//edit a review
+router.put('/:reviewId', [requireAuth,validateReviews], async (req, res)=>{
+
+})
+
+//delete a review
+router.delete('/:reviewId', requireAuth, async (req, res)=>{
+
+})
+
+//Get all Reviews of the Current User
 router.get("/current", requireAuth, async (req, res) => {
     const reviews = await Review.findAll({
         where: {
