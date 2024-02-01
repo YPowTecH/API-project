@@ -4,7 +4,6 @@ const { requireAuth, restoreUser } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation')
 const { Op } = require('sequelize');
 const { check } = require('express-validator');
-const spot = require('../../db/models/spot');
 
 const router = express.Router()
 
@@ -68,7 +67,7 @@ const validateDates = [
         .exists({ checkFalsy: true })
         .custom((val, { req }) => {
             const currentDate = new Date()
-            if (new Date(val) <= currentDate) {
+            if (new Date(val) < currentDate) {
                 throw new Error("StartDate cannot be in the past")
             }
             return true
