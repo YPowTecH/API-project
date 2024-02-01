@@ -116,6 +116,24 @@ router.get('/current', requireAuth, async (req, res) => {
     })
 })
 
+//Get all Reviews by a Spot's id
+router.get('/:spotId/reviews', async (req, res)=>{
+    const { spotId } = req.params
+
+    const spot = await Spot.findByPk(spotId)
+
+    if(!spot){
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+
+    const allReviews = await Review.findAll({
+        
+    })
+})
+
+
 //Get all bookings for a Spot based on Spot's id
 router.get('/:spotId/bookings', requireAuth, async (req, res)=>{
 
@@ -140,16 +158,16 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     }
 
     //proper auth
-    if(req.user.id !== spot.ownerId){
+    if(req.user.id !== spotId.ownerId){
         return res.status(403).json({
             "message": "Spot must belong to the current user"
         })
     }
 
     const spotImage = await SpotImage.create({
-        spotId: spotId.id,
+        [[spotId, "id"]]: spotId.id,
         url,
-        preview
+        preview,
     })
 
     res.json(spotImage)
@@ -194,7 +212,7 @@ router.get('/:spotId', async (req, res) => {
     })
 
     const owner = await User.findByPk(spot.ownerId, {
-        attributes: ['id', 'firstname', 'lastname']
+        attributes: ['id', 'firstName', 'lastName']
     })
 
     spot.setDataValue('numReviews', numReviews)
