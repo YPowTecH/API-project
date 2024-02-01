@@ -149,7 +149,7 @@ router.get('/:spotId/reviews', async (req, res) => {
 //create a review
 router.post('/:spotId/reviews', [requireAuth, validateReviews], async (req, res) => {
     const { review, stars } = req.body
-    const { spotId } = req.params //have to destructure spot and not do it in a single line
+    const { spotId } = req.params
     //const spotId = await Spot.findByPk(req.params.spotId)
     const spot = await Spot.findByPk(spotId)
 
@@ -173,7 +173,6 @@ router.post('/:spotId/reviews', [requireAuth, validateReviews], async (req, res)
     }
 
     const post = await Review.create({
-        //returning as a string?
         spotId: +spotId,
         userId: req.user.id,
         review,
@@ -291,7 +290,7 @@ router.put('/:spotId', [requireAuth, validateSpots], async (req, res) => {
     //proper auth
     if (req.user.id !== spot.ownerId) {
         return res.status(403).json({
-            "message": "Spot must belong to the current user"
+            message: "Spot must belong to the current user"
         })
     }
 
