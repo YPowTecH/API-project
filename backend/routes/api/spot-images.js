@@ -1,16 +1,13 @@
 const express = require('express')
 const { Spot, SpotImage, Review, User, Booking, ReviewImage } = require('../../db/models')
 const { requireAuth, restoreUser } = require('../../utils/auth');
-const { handleValidationErrors } = require('../../utils/validation')
 const { Op } = require('sequelize');
-const { check } = require('express-validator');
 
 const router = express.Router()
 
 router.delete('/:imageId', requireAuth, async (req, res)=>{
     const { imageId } = req.params
     const spotImg = await SpotImage.findByPk(imageId)
-    const spot = await Spot.findByPk(spotImg.spotId)
 
     if(!spotImg){
         return res.status(404).json({
@@ -18,6 +15,8 @@ router.delete('/:imageId', requireAuth, async (req, res)=>{
         })
     }
 
+    const spot = await Spot.findByPk(spotImg.spotId)
+    
     if(!spot){
         return res.status(404).json({
             message:"Spot must belong to the current user"
