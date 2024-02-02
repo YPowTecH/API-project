@@ -3,7 +3,7 @@ const { Spot, SpotImage, Review, User, Booking, ReviewImage } = require('../../d
 const { requireAuth, restoreUser } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation')
 const { Op } = require('sequelize');
-const { check } = require('express-validator');
+const { check, query } = require('express-validator');
 
 const router = express.Router()
 
@@ -85,11 +85,42 @@ const validateDates = [
 ]
 
 
-
-//Add query filters to get all spots
-const validateQueryFilter = [
-
+const validateQueryFilters = [
+    query('page')
+        .optional()
+        .isInt({min:1})
+        .withMessage("Page must be greater than or equal to 1"),
+    query('size')
+        .optional()
+        .isInt({min:1})
+        .withMessage("Size must be greater than or equal to 1"),
+    query('maxLat')
+        .optional()
+        .isFloat({ min: -90, max: 90 })
+        .withMessage("Maximum latitude is invalid"),
+    query('minLat')
+        .optional()
+        .isFloat({ min: -180, max: 180 })
+        .withMessage("Minimum latitude is invalid"),
+    query('minLng')
+        .optional()
+        .isFloat({ min: -180, max: 180 })
+        .withMessage("Maximum longitude is invalid"),
+    query('maxLng')
+        .optional()
+        .isFloat({ min: -180, max: 180 })
+        .withMessage("Minimum longitude is invalid"),
+    query('minPrice')
+        .optional()
+        .isFloat({ min: 0 })
+        .withMessage("Minimum price must be greater than or equal to 0"),
+    query('maxPrice')
+        .optional()
+        .isFloat({ min: 0 })
+        .withMessage("Maximum price must be greater than or equal to 0"),
+handleValidationErrors
 ]
+
 //Get all spots by logged user
 router.get('/current', requireAuth, async (req, res) => {
     const ownerId = req.user.id
@@ -496,8 +527,25 @@ router.post('/', [requireAuth, validateSpots], async (req, res) => {
 
 
 // Get all spots
-router.get('/', async (req, res) => {
-    const spots = await Spot.findAll()
+router.get('/', validateQueryFilters, async (req, res) => {
+let { page, size, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query
+    let pagination = {}
+    if(!page) page = 1
+    if(!size) size = 20
+    if(page > 10) page = 10
+    if(size > 20) size = 20
+
+    pagination.limit = size
+    pagination.offset = size * (page -1)
+
+    if(parseInt(size)<=0||page<=0){
+        delete pagination.page
+        delete pagination.size
+    }
+
+    const spots = await Spot.findAll({
+        ...pagination
+    })
     //avgstarrating
     let avgRating
     for (let i = 0; i < spots.length; i++) {
@@ -536,6 +584,8 @@ router.get('/', async (req, res) => {
 
     res.json({
         Spots: spots,
+        page: parseInt(page),
+        size: parseInt(size)
     })
 })
 
