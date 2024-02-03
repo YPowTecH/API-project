@@ -2,7 +2,7 @@ const express = require('express')
 const { Spot, SpotImage, Review, User, Booking, ReviewImage } = require('../../db/models')
 const { requireAuth, restoreUser } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation')
-const { Op } = require('sequelize');
+const { Op, UnknownConstraintError } = require('sequelize');
 const { check, query } = require('express-validator');
 
 const router = express.Router()
@@ -88,11 +88,11 @@ const validateDates = [
 const validateQueryFilters = [
     query('page')
         .optional()
-        .isInt({min:1})
+        .isInt({ min: 1 })
         .withMessage("Page must be greater than or equal to 1"),
     query('size')
         .optional()
-        .isInt({min:1})
+        .isInt({ min: 1 })
         .withMessage("Size must be greater than or equal to 1"),
     query('maxLat')
         .optional()
@@ -118,7 +118,7 @@ const validateQueryFilters = [
         .optional()
         .isFloat({ min: 0 })
         .withMessage("Maximum price must be greater than or equal to 0"),
-handleValidationErrors
+    handleValidationErrors
 ]
 
 //Get all spots by logged user
@@ -197,7 +197,9 @@ router.get('/:spotId/reviews', async (req, res) => {
         ]
     })
 
-    res.json(allReviews)
+    res.json({
+        Reviews: allReviews
+    })
 })
 
 //create a review
@@ -299,8 +301,8 @@ router.post('/:spotId/bookings', [requireAuth, validateDates], async (req, res) 
 
     //if owner of spot
     if (req.user.id === spot.ownerId) {
-        return res.status(418).json({
-            message: "Spot must NOT belong to the current user"
+        return res.status(403).json({
+            message: "Forbidden"
         })
     }
 
@@ -308,16 +310,16 @@ router.post('/:spotId/bookings', [requireAuth, validateDates], async (req, res) 
     const existBooking = await Booking.findOne({
         where: {
             spotId: spotId,
-            [Op.or]:
+            [Op.and]:
                 [
                     {
                         startDate: {
-                            [Op.between]: [startDate, endDate]
+                            [Op.lte]: new Date(endDate)
                         }
                     },
                     {
                         endDate: {
-                            [Op.between]: [startDate, endDate]
+                            [Op.gte]: new Date(startDate)
                         }
                     }
                 ]
@@ -358,17 +360,21 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     //proper auth
     if (req.user.id !== spotId.ownerId) {
         return res.status(403).json({
-            message: "Spot must belong to the current user"
+            message: "Forbidden"
         })
     }
 
     const spotImage = await SpotImage.create({
-        [["spotId", "id"]]: spotId.id,
+        spotId: req.params.spotId,
         url,
         preview,
     })
 
-    res.json(spotImage)
+    res.json({
+        id: spotImage.id,
+        url: spotImage.url,
+        preview: spotImage.preview
+    })
 })
 
 // Get Spot details by ID
@@ -439,7 +445,7 @@ router.put('/:spotId', [requireAuth, validateSpots], async (req, res) => {
     //proper auth
     if (req.user.id !== spot.ownerId) {
         return res.status(403).json({
-            message: "Spot must belong to the current user"
+            message: "Forbidden"
         })
     }
 
@@ -492,7 +498,7 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     //proper auth
     if (req.user.id !== spot.ownerId) {
         return res.status(403).json({
-            "message": "Spot must belong to the current user"
+            message: "Forbidden"
         })
     }
 
@@ -528,23 +534,65 @@ router.post('/', [requireAuth, validateSpots], async (req, res) => {
 
 // Get all spots
 router.get('/', validateQueryFilters, async (req, res) => {
-let { page, size, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query
+    let { page, size, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query
     let pagination = {}
-    if(!page) page = 1
-    if(!size) size = 20
-    if(page > 10) page = 10
-    if(size > 20) size = 20
+    const queryObj = {
+        where: {
+
+        }
+    }
+    if (!page) page = 1
+    if (!size) size = 20
+    if (page > 10) page = 10
+    if (size > 20) size = 20
 
     pagination.limit = size
-    pagination.offset = size * (page -1)
+    pagination.offset = size * (page - 1)
 
-    if(parseInt(size)<=0||page<=0){
+    if (parseInt(size) <= 0 || page <= 0) {
         delete pagination.page
         delete pagination.size
     }
 
+    if (minLat) {
+        queryObj.where.lat = { [Op.gte]: minLat }
+    }
+
+    if (maxLat) {
+        queryObj.where.lat = { [Op.lte]: maxLat }
+    }
+
+    if (maxLat) {
+        queryObj.where.lat = { [Op.lte]: maxLat }
+    }
+
+    if (minLat && maxLat) {
+        queryObj.where.lat = { [Op.between]: [minLat, maxLat] }
+    }
+
+    if (minLng) {
+        queryObj.where.lng = { [Op.gte]: minLng }
+    }
+
+    if (maxLng) {
+        queryObj.where.lng = { [Op.lte]: maxLng }
+    }
+
+    if (minLng && maxLng) {
+        queryObj.where.lng = { [Op.between]: [minLng, maxLng] }
+    }
+
+    if (minPrice) {
+        queryObj.where.price = { [Op.gte]: minPrice }
+    }
+
+    if (maxPrice) {
+        queryObj.where.price = { [Op.lte]: maxPrice }
+    }
+
     const spots = await Spot.findAll({
-        ...pagination
+        ...pagination,
+        ...queryObj
     })
     //avgstarrating
     let avgRating

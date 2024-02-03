@@ -100,16 +100,16 @@ router.put('/:bookingId', [requireAuth, validateDates], async (req, res) => {
                 [Op.ne]: bookingId
             },
             spotId: bookings.spotId,
-            [Op.or]:
+            [Op.and]:
                 [
                     {
                         startDate: {
-                            [Op.between]: [startDate, endDate]
+                            [Op.lte]: new Date(endDate)
                         }
                     },
                     {
                         endDate: {
-                            [Op.between]: [startDate, endDate]
+                            [Op.gte]: new Date(startDate)
                         }
                     }
                 ]
@@ -123,6 +123,13 @@ router.put('/:bookingId', [requireAuth, validateDates], async (req, res) => {
                 startDate: "Start date conflicts with an existing booking",
                 endDate: "End date conflicts with an existing booking"
             }
+        })
+    }
+
+
+    if(req.user.id !== bookings.userId){
+        return res.status(403).json({
+            message: "forbidden"
         })
     }
 
@@ -147,7 +154,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 
     if(bookings.userId !== req.user.id){
         return res.status(403).json({
-            message: "Booking must belong to the current user or the Spot must belong to the current user"
+            message: "Forbidden"
         })
     }
 
