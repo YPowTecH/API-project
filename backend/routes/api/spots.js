@@ -429,9 +429,9 @@ router.get('/:spotId', async (req, res) => {
     spot.setDataValue('avgStarRating', avgRating)
     spot.setDataValue('SpotImages', imgurl)
     spot.setDataValue('Owner', owner)
-    if (spot.lat) spot.lat = parseFloat(lat)
-    if (spot.lng) spot.lng = parseFloat(lng)
-    if (spot.price) spot.price = parseFloat(price)
+    if (spot.lat) spot.lat = parseFloat(spot.lat)
+    if (spot.lng) spot.lng = parseFloat(spot.lng)
+    if (spot.price) spot.price = parseFloat(spot.price)
 
 
     res.json(spot)
@@ -539,7 +539,7 @@ router.post('/', [requireAuth, validateSpots], async (req, res) => {
     if (spot.lng) spot.lng = parseFloat(lng)
     if (spot.price) spot.price = parseFloat(price)
 
-    res.json(spot)
+    res.status(201).json(spot)
 
 })
 
@@ -568,10 +568,6 @@ router.get('/', validateQueryFilters, async (req, res) => {
 
     if (minLat) {
         queryObj.where.lat = { [Op.gte]: minLat }
-    }
-
-    if (maxLat) {
-        queryObj.where.lat = { [Op.lte]: maxLat }
     }
 
     if (maxLat) {
