@@ -59,7 +59,15 @@ router.get("/current", requireAuth, async (req, res) => {
         } else {
             json.Spot.previewImage = null
         }
-
+        if(json.Spot.lat){
+            json.Spot.lat = parseFloat(json.Spot.lat)
+        }
+        if(json.Spot.lng){
+            json.Spot.lng = parseFloat(json.Spot.lng)
+        }
+        if(json.Spot.price){
+            json.Spot.price = parseFloat(json.Spot.price)
+        }
         //deletes url
         delete json.Spot.SpotImages
         reviews[i] = json

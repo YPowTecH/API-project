@@ -64,6 +64,20 @@ router.get('/current', requireAuth, async (req, res) => {
             json.Spot.previewImage = null
         }
 
+        if(json.Spot.lat){
+            json.Spot.lat = parseFloat(json.Spot.lat)
+        }
+
+
+        if(json.Spot.lng){
+            json.Spot.lng = parseFloat(json.Spot.lng)
+        }
+
+
+        if(json.Spot.lat){
+            json.Spot.lat = parseFloat(json.Spot.lat)
+        }
+
         bookings[i] = json
     }
 

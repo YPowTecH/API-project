@@ -37,7 +37,6 @@ const validateSpots = [
     check('name')
         .isLength({ max: 49 })
         .isString()
-        .notEmpty()
         .withMessage("Name must be less than 50 characters"),
     check('description')
         .exists({ checkFalsy: true })
@@ -46,7 +45,6 @@ const validateSpots = [
         .withMessage("Description is required"),
     check('price')
         .isFloat({ min: 0 })
-        .notEmpty()
         .withMessage("Price per day must be a positive number"),
     handleValidationErrors
 ]
@@ -162,7 +160,15 @@ router.get('/current', requireAuth, async (req, res) => {
         } else {
             spots[i].setDataValue('previewImage', imgurl.url)
         }
-
+        if (spots[i].lat) {
+            spots[i].setDataValue('lat', parseFloat(spots[i].lat))
+        }
+        if (spots[i].lng) {
+            spots[i].setDataValue('lng', parseFloat(spots[i].lng))
+        }
+        if (spots[i].price) {
+            spots[i].setDataValue('price', parseFloat(spots[i].price))
+        }
     }
 
     res.json({
@@ -423,7 +429,9 @@ router.get('/:spotId', async (req, res) => {
     spot.setDataValue('avgStarRating', avgRating)
     spot.setDataValue('SpotImages', imgurl)
     spot.setDataValue('Owner', owner)
-
+    if (spot.lat) spot.lat = parseFloat(lat)
+    if (spot.lng) spot.lng = parseFloat(lng)
+    if (spot.price) spot.price = parseFloat(price)
 
 
     res.json(spot)
@@ -527,6 +535,10 @@ router.post('/', [requireAuth, validateSpots], async (req, res) => {
         price
     })
 
+    if (spot.lat) spot.lat = parseFloat(lat)
+    if (spot.lng) spot.lng = parseFloat(lng)
+    if (spot.price) spot.price = parseFloat(price)
+
     res.json(spot)
 
 })
@@ -622,13 +634,25 @@ router.get('/', validateQueryFilters, async (req, res) => {
             }
         })
 
-        if (imgurl === null) {
+        if (!imgurl) {
             spots[i].setDataValue('previewImage', null)
         } else {
             spots[i].setDataValue('previewImage', imgurl.url)
         }
 
+        if (spots[i].lat) {
+            spots[i].setDataValue('lat', parseFloat(spots[i].lat))
+        }
+        if (spots[i].lng) {
+            spots[i].setDataValue('lng', parseFloat(spots[i].lng))
+        }
+        if (spots[i].price) {
+            spots[i].setDataValue('price', parseFloat(spots[i].price))
+        }
     }
+
+
+
 
     res.json({
         Spots: spots,
