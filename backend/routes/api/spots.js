@@ -10,7 +10,7 @@ const router = express.Router()
 const validateSpots = [
     check('address')
         .exists({ checkFalsy: true })
-        .withMessage('Street Address required'),
+        .withMessage('Street Address is required'),
     check('city')
         .exists({ checkFalsy: true })
         .withMessage('City is required'),
