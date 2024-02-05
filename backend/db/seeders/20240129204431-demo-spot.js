@@ -90,6 +90,18 @@ module.exports = {
         description: 'An ancient city punished for high treason against the Greater Will',
         price: 500.99
       },
+      {
+        ownerId: 3,
+        address: 'North of the Consecrated Snowfield',
+        city: 'Ordina',
+        state: 'Consecrated Snowfield',
+        country: 'Lands Between',
+        lat: 33.33,
+        lng: 36.99,
+        name: 'Miquella\'s Haligtree',
+        description: 'An ancient city punished for high treason against the Greater Will',
+        price: 72.99
+      },
     ], options, { validate: true})
   },
 

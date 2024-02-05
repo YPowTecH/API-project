@@ -41,6 +41,12 @@ module.exports = {
       review: 'It\'s really really cold. Make sure you are well prepared.',
       stars: 2
     },
+    {
+      spotId:7,
+      userId:1,
+      review: 'Great place love it.',
+      stars: 4
+    },
   ], options, { validate: true})
   },
 

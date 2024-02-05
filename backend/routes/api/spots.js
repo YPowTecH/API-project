@@ -10,23 +10,15 @@ const router = express.Router()
 const validateSpots = [
     check('address')
         .exists({ checkFalsy: true })
-        .isString()
-        .notEmpty()
         .withMessage('Street Address required'),
     check('city')
         .exists({ checkFalsy: true })
-        .isString()
-        .notEmpty()
         .withMessage('City is required'),
     check('state')
         .exists({ checkFalsy: true })
-        .isString()
-        .notEmpty()
         .withMessage('State is required'),
     check('country')
         .exists({ checkFalsy: true })
-        .isString()
-        .notEmpty()
         .withMessage('Country is required'),
     check('lat')
         .isFloat({ min: -90, max: 90 })
@@ -35,13 +27,10 @@ const validateSpots = [
         .isFloat({ min: -180, max: 180 })
         .withMessage("Longitude must be within -180 and 180"),
     check('name')
-        .isLength({ max: 49 })
-        .isString()
+        .isLength({ max: 50 })
         .withMessage("Name must be less than 50 characters"),
     check('description')
         .exists({ checkFalsy: true })
-        .isString()
-        .notEmpty()
         .withMessage("Description is required"),
     check('price')
         .isFloat({ min: 0 })
@@ -54,7 +43,6 @@ const validateReviews = [
         .exists({ checkFalsy: true })
         .withMessage("Review text is required"),
     check('stars')
-        .exists({ checkFalsy: true })
         .isInt({ min: 1, max: 5 })
         .withMessage("Stars must be an integer from 1 to 5"),
     handleValidationErrors
@@ -241,7 +229,7 @@ router.post('/:spotId/reviews', [requireAuth, validateReviews], async (req, res)
         stars
     })
     // console.log('should be an integer', post)
-    res.status(200).json(post)
+    res.status(201).json(post)
 })
 
 

@@ -47,7 +47,12 @@ module.exports = {
         spotId: 6,
         url: 'https://imgur.com/a/aQOoP3f',
         preview: true
-      }
+      },
+      {
+        spotId: 7,
+        url: 'https://imgur.com/a/t1ZFjxZ',
+        preview: true
+      },
 
     ], options, { validate: true})
   },
