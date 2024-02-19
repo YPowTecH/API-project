@@ -1,7 +1,39 @@
-.spots-container{
+.Spot-container {
     border: solid;
+
 }
 
-.spot-container{
-    border: solid;
+.spots-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.Nav-container {
+    max-width: 400px;
+
+}
+
+.Spot-container {
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+}
+
+.Review-location-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.image {
+    width: 300px;
+    height: 250px;
+
+}
+
+.Nav-container,
+.Spot-container {
+    text-decoration: none;
 }
