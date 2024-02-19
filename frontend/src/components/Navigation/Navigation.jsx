@@ -16,7 +16,7 @@ function Navigation({ isLoaded }) {
       </li>
     ) : (
       <>
-        <li>
+        <li className="LogIn">
           <OpenModalButton
             buttonText="Log In"
             modalComponent={<LoginFormModal />}

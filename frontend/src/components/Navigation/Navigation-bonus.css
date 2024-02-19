@@ -1,0 +1,9 @@
+.Navigation-Header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.LandingPageLogo{
+    width: 200px;
+}
