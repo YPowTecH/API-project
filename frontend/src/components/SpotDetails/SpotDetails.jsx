@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { thunkSpotDetails } from '../../store/spots'
 import { thunkLoadReviews } from '../../store/reviews'
+import SpotReviews from '../SpotReviews/SpotReviews'
 import './SpotDetails.css'
 
 function SpotDetails() {
@@ -42,7 +43,9 @@ function SpotDetails() {
                 <img className='BigImage' src={imgArray[0].url} />
                 <div className='SmallImage-container'>
                     {imgArray && imgArray.slice(1).map((img) => (
+                        <div key={img.id}>
                         <img className='SmallImages' src={img?.url} />
+                        </div>
                     ))}
                 </div>
             </div>
@@ -74,7 +77,7 @@ function SpotDetails() {
             </div>
             <div className='Reviews-container'>
                 <div className='Review'>
-
+                        <SpotReviews/>
                 </div>
             </div>
 
