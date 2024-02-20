@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from "redux-thunk";
 import { csrfFetch } from './csrf';
 
-//constant
+//Constant
 const ALL_SPOTS = '/spots/ALL_SPOTS'
 const SPOT_DETAILS = '/spots/SPOT_DETAILS'
 
@@ -29,7 +29,7 @@ export const thunkLoadSpots = () => async(dispatch)=>{
 
     if(response.ok){
         const data = await response.json()
-
+        console.log('data=>',data)
         dispatch(loadSpots(data))
         return data
     }
