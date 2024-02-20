@@ -35,14 +35,13 @@ export const thunkLoadSpots = () => async(dispatch)=>{
     }
 }
 
-export const thunkLoadSpotDetails = () => async(dispatch)=>{
-    const response = await fetch(`{/api/spots/$spot.id}`)
+export const thunkSpotDetails = (spotId) => async(dispatch)=>{
+    const response = await fetch(`/api/spots/${spotId}`)
 
     if(response.ok){
-        const data = await response.json()
-
-        dispatch(loadSpots(data))
-        return data
+        const spot= await response.json()
+        dispatch(spotDetails(spot))
+        return spot
     }
 }
 

@@ -1,0 +1,42 @@
+.Header-container{
+display: flex;
+
+margin: 20px;
+}
+
+.Image-container{
+ display:flex;
+ justify-content: center;
+ /* border: solid black; */
+ margin: 15px;
+}
+
+.BigImage {
+    width: 800px;
+    height: 505px;
+    padding: 5px;
+}
+
+.SmallImage-container {
+    display: grid;
+    gap: 5px;
+    padding: 5px;
+    grid-template-columns: 1fr 1fr
+}
+
+.SmallImages {
+    width: 400px;
+    height: 250px;
+}
+
+/* .Description-container{
+
+}
+
+.Reviews-container{
+
+}
+
+.Review{
+
+} */

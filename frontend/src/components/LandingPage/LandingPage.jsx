@@ -7,7 +7,7 @@ import './LandingPage.css'
 function LandingPage() {
     const dispatch = useDispatch()
     const spots = useSelector((state) => Object.values(state.spots))
-    console.log('my spots', spots)
+    // console.log('my spots', spots)
 
 
     useEffect(() => {

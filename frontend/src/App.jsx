@@ -7,6 +7,7 @@ import Navigation from './components/Navigation/Navigation-bonus';
 import * as sessionActions from './store/session';
 import { Modal } from './context/Modal';
 import LandingPage from './components/LandingPage/LandingPage';
+import SpotDetails from './components/SpotDetails/SpotDetails'
 // import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 function Layout() {
@@ -47,7 +48,11 @@ const router = createBrowserRouter([
         path: '/',
         element: <LandingPage/>
       },
-
+      {
+        path: '/spots/:spotId',
+        element: <SpotDetails />
+      },
+      
       // {
       //   path: 'login',
       //   element: <LoginFormPage />
