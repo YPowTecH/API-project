@@ -10,17 +10,17 @@ function SpotDetails() {
     const { spotId } = useParams()
     const dispatch = useDispatch()
     const spot = useSelector((state) => state.spots[spotId])
-    // console.log('my spot here===>', spot)
+    console.log('my spot here===>', spot)
     const review = useSelector((state) => state.reviews)
-    console.log('reviews => ', review)
+    // console.log('reviews => ', review)
     const reviewArray = Object.values(review)
-    console.log('rev arr=>', reviewArray)
+    // console.log('rev arr=>', reviewArray)
     const imgArray = spot?.SpotImages
     // console.log('imgarr', imgArray)
     useEffect(() => {
         dispatch(thunkSpotDetails(spotId));
         dispatch(thunkLoadReviews(spotId))
-    }, [dispatch, spotId])
+    }, [dispatch, spotId]) //reviewArray.length
 
     if (!spot || !spot.SpotImages) {
         return <div>Loading...</div>
@@ -40,7 +40,7 @@ function SpotDetails() {
                 </div>
             </div>
             <div className='Image-container' >
-                <img className='BigImage' src={imgArray[0].url} />
+                <img className='BigImage' src={spot?.SpotImages && imgArray[0].url} />
                 <div className='SmallImage-container'>
                     {imgArray && imgArray.slice(1).map((img) => (
                         <div key={img.id}>
