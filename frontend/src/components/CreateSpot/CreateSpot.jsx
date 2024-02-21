@@ -134,7 +134,7 @@ const CreateSpot = () => {
                         <label>Street Address</label>
                         <input type='text' name='address' placeholder='Enter an address' value={address} onChange={(e)=>setAddress(e.target.value)}></input>
                     </div>
-                    {'address' in validations && (<p>{validations.address}</p>)}
+                    {submitted && 'address' in validations && (<p>{validations.address}</p>)}
                     <div>
                         <label>City</label>
                         <input type='text' name='city' placeholder='Enter a city' value={city} onChange={(e)=>setCity(e.target.value)}></input>
