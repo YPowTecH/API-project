@@ -42,8 +42,8 @@ function SpotReviews() {
                                 <p className='date-month'>{formatDate(review.createdAt)}</p>
                             </div>
                             <p className='review'>{review.review}</p>
-
                         </div>
+                        <hr className='Review-line' />
                     </div>
                 ))}
             </div>
