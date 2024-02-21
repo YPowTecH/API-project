@@ -47,7 +47,12 @@ export const thunkCreateReview = (spotId, review) => async(dispatch)=>{
     })
 
     if(response.ok){
-        const data = await response.json()
+        const review = await response.json()
+        dispatch(createReview(review))
+        return review
+    }else{
+        const error = await response.json()
+        return error
     }
 
 

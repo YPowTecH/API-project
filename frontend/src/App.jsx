@@ -8,6 +8,7 @@ import * as sessionActions from './store/session';
 import { Modal } from './context/Modal';
 import LandingPage from './components/LandingPage/LandingPage';
 import SpotDetails from './components/SpotDetails/SpotDetails'
+import CreateSpot from './components/CreateSpot/CreateSpot';
 // import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 function Layout() {
@@ -52,7 +53,11 @@ const router = createBrowserRouter([
         path: '/spots/:spotId',
         element: <SpotDetails />
       },
-      
+      {
+        path: '/spots/new',
+        element: <CreateSpot />
+      },
+
       // {
       //   path: 'login',
       //   element: <LoginFormPage />
