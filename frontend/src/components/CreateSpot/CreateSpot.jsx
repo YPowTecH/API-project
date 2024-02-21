@@ -26,40 +26,44 @@ const CreateSpot = () => {
     const [submitted, setSubmitted] = useState(false)
 
     useEffect(() => {
-        const validationsObject = {}
-        if (!country) {
-            validationsObject.country = 'Country is required'
-          }
+        if(submitted) {
+            const validationsObject = {}
+            if (!country) {
+                validationsObject.country = 'Country is required'
+              }
 
-        if(!address) {
-            validationsObject.address = 'Address is required'
+            if(!address) {
+                validationsObject.address = 'Address is required'
+            }
+
+            if(!city) {
+                validationsObject.city = 'City is required'
+            }
+
+            if(!state) {
+                validationsObject.state = 'State is required'
+            }
+
+            if(description.length < 30) {
+                validationsObject.description = 'Description needs 30 or more characters'
+            }
+
+            if(!name) {
+                validationsObject.name = 'Name is required'
+            }
+
+            if(!price) {
+                validationsObject.price = 'Price per night is required'
+            }
+
+            if(!img1) {
+                validationsObject.img0 = 'Image is required'
+            }
+            setValidations(validationsObject)
         }
 
-        if(!city) {
-            validationsObject.city = 'City is required'
-        }
 
-        if(!state) {
-            validationsObject.state = 'State is required'
-        }
 
-        if(description.length < 30) {
-            validationsObject.description = 'Description needs 30 or more characters'
-        }
-
-        if(!name) {
-            validationsObject.name = 'Name is required'
-        }
-
-        if(!price) {
-            validationsObject.price = 'Price per night is required'
-        }
-
-        if(!img1) {
-            validationsObject.img0 = 'Image is required'
-        }
-
-        setValidations(validationsObject)
     }, [country, address, city, state, description, name, price, img0, img1, img2, img3, img4])
 
     const handleSubmit = async (e) => {
