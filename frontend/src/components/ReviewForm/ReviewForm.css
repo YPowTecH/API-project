@@ -33,11 +33,11 @@ border-radius: 30px;
 background-color: #2F4F4F;
 color: white;
 padding:10px;
-box-shadow: 0 0 0.75rem goldenrod;
+/* box-shadow: 0 0 0.75rem goldenrod; */
 transition: box-shadow 0.3s ease;
 cursor: pointer;
 }
 
-.Submit-btn:active {
-    box-shadow: 0 0 4rem goldenrod;
+.Submit-btn:hover {
+    box-shadow: 0 0 1rem goldenrod;
 }

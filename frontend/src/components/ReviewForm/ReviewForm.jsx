@@ -4,18 +4,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useModal } from '../../context/Modal'
 import { thunkCreateReview } from '../../store/reviews'
 import { thunkLoadReviews } from '../../store/reviews'
+import { thunkLoadSpots } from '../../store/spots'
+// import { useNavigate } from 'react-router-dom'
 import './ReviewForm.css'
 
 const ReviewForm = ({ spotId }) => {
     const dispatch = useDispatch()
+    // const navi = useNavigate()
     const [review, setReview] = useState('')
     const [stars, setStars] = useState(null)
     const [hover, setHover] = useState(null)
     const [validations, setValidations] = useState({})
     const { closeModal } = useModal()
-    console.log('modal',useModal())
+    const [submitted, setSubmitted] = useState(false)
+
+    // console.log('modal',useModal())
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setSubmitted(true)
         const formData = {
             review,
             stars
@@ -30,7 +36,7 @@ const ReviewForm = ({ spotId }) => {
         }
 
       await dispatch(thunkLoadReviews(spotId))
-    }
+     }
 
     return (
         <form onSubmit={handleSubmit} className='Review-form'>

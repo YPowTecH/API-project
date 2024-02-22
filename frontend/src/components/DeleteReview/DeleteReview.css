@@ -1,0 +1,55 @@
+
+.title{
+    color: goldenrod;
+    text-shadow: 0 0 0.5rem gray;
+    font-size: 45px;
+}
+
+.text{
+    color: #2F4F4F;
+    font-size: 30px;
+}
+
+.btn {
+    background-color: red;
+    border: none;
+    border-radius: 3px;
+    color:white;
+    padding:12px;
+    font-size: 20px;
+}
+
+.btn2 {
+    background-color: gray;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    padding:12px;
+    font-size: 20px;
+}
+.btn:hover {
+    cursor: pointer;
+    box-shadow: 0 0 1rem goldenrod;
+}
+.btn2:hover {
+    cursor: pointer;
+    box-shadow: 0 0 1rem goldenrod;
+}
+
+.Delete-Modal-container {
+    padding: 30px;
+
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

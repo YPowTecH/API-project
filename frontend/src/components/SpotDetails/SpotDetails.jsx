@@ -5,6 +5,7 @@ import { thunkSpotDetails } from '../../store/spots'
 import { thunkLoadReviews } from '../../store/reviews'
 import SpotReviews from '../SpotReviews/SpotReviews'
 import ReviewForm from '../ReviewForm/ReviewForm'
+import { useModal } from '../../context/Modal'
 
 import './SpotDetails.css'
 import OpenModalButton from '../OpenModalButton'
@@ -12,6 +13,8 @@ import OpenModalButton from '../OpenModalButton'
 
 function SpotDetails() {
     const { spotId } = useParams()
+    // const { setOnModalClose } = useModal()
+    console.log('modal==>', useModal())
     const dispatch = useDispatch()
     const spot = useSelector((state) => state.spots[spotId])
     console.log('my spot here===>', spot)
@@ -35,13 +38,13 @@ function SpotDetails() {
 
     // const currUserIsOwner = currUser?.id === spot?.Owner.id
     // console.log('currUserOwner', currUserIsOwner)
-
     useEffect(() => {
         dispatch(thunkSpotDetails(spotId))
         console.log('Before dispatch:', review);
         dispatch(thunkLoadReviews(spotId))
         console.log('After dispatch:', review)
-    }, [dispatch, spotId]) //reviewArray.length
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch, spotId, reviewArray.length]) //reviewArray.length
 
     if (!spot || !spot.SpotImages) {
         return <div>Loading...</div>
@@ -105,12 +108,17 @@ function SpotDetails() {
                 </h2>
             </div>
             <div className='Post-review'>
-                {currUser && !isOwner(currUser) && !hasReview && (<OpenModalButton className='Button' buttonText='Post Your Review' modalComponent={<ReviewForm spotId={spotId} />} />
-                )}
+                {currUser && !isOwner(currUser) && !hasReview &&
+                    (<OpenModalButton
+                        className='Button'
+                        buttonText='Post Your Review'
+                        modalComponent={<ReviewForm spotId={spotId} />} />
+                    )}
             </div>
             <div className='Reviews-container'>
                 <div className='Review'>
-                    <SpotReviews />
+                    <SpotReviews  />
+                    {/* spotId = { spotId } */}
                 </div>
             </div>
 
