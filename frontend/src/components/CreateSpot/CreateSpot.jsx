@@ -157,7 +157,7 @@ const CreateSpot = () => {
                 <div className='Section2'>
                     <h2>Describe your place to guests</h2>
                     <p>Describe your place to guests", a caption of "Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
-                    <textarea name='description' placeholder='Please write at least 30 characters' rows='4' cols='50' value={description} onChange={(e)=>setDescription(e.target.value)}></textarea>
+                    <textarea name='description' placeholder='Please write at least 30 characters' rows='10' cols='100' value={description} onChange={(e)=>setDescription(e.target.value)}></textarea>
                 </div>
                 {submitted && 'description' in validations && (<p>{validations.description}</p>)}
                 <div className='Section3'>

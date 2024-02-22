@@ -23,7 +23,7 @@ function SpotReviews() {
         return <div className= 'No-review'>Be the first to post a review!</div>
     }
 
-    console.log(reviewArray[0].createdAt)
+    // console.log(reviewArray[0].createdAt)
     //dates
     function formatDate(date){
         const newDate = new Date(date)

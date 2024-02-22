@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { thunkSpotDetails } from '../../store/spots'
 import { thunkLoadReviews } from '../../store/reviews'
 import SpotReviews from '../SpotReviews/SpotReviews'
+import ReviewForm from '../ReviewForm/ReviewForm'
+
 import './SpotDetails.css'
+import OpenModalButton from '../OpenModalButton'
+
 
 function SpotDetails() {
     const { spotId } = useParams()
@@ -17,6 +21,21 @@ function SpotDetails() {
     // console.log('rev arr=>', reviewArray)
     const imgArray = spot?.SpotImages
     // console.log('imgarr', imgArray)
+    const currUser = useSelector((state) => state.session.user)
+    console.log('curruser=>', currUser)
+
+    function waitUser(currUser) {
+        let currUserIsOwner
+        if (currUser && spot.Owner) {
+            currUserIsOwner = currUser?.id === spot?.Owner.id
+            return currUserIsOwner
+        }
+    }
+    console.log('up',waitUser(currUser))
+
+    // const currUserIsOwner = currUser?.id === spot?.Owner.id
+    // console.log('currUserOwner', currUserIsOwner)
+
     useEffect(() => {
         dispatch(thunkSpotDetails(spotId));
         dispatch(thunkLoadReviews(spotId))
@@ -44,7 +63,7 @@ function SpotDetails() {
                 <div className='SmallImage-container'>
                     {imgArray && imgArray.slice(1).map((img) => (
                         <div key={img.id}>
-                        <img className='SmallImages' src={img?.url} />
+                            <img className='SmallImages' src={img?.url} />
                         </div>
                     ))}
                 </div>
@@ -75,9 +94,13 @@ function SpotDetails() {
                     {spot.numReviews > 0 && ` · ${spot.numReviews} ${spot.numReviews === 1 ? 'Review' : 'Reviews'}`}
                 </h2>
             </div>
+            <div className='Post-review'>
+                {currUser && !waitUser(currUser) && (<OpenModalButton className='Button' buttonText='Post Your Review' modalComponent={<ReviewForm spotId={spotId}/>}/>
+            )}
+            </div>
             <div className='Reviews-container'>
                 <div className='Review'>
-                        <SpotReviews/>
+                    <SpotReviews />
                 </div>
             </div>
 
