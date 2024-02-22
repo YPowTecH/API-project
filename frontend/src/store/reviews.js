@@ -68,6 +68,9 @@ const reviewsReducer= (state={}, action)=>{
             action.reviews.forEach((review)=>(newState[review.id]=review))
             return newState
         }
+        case CREATE_REVIEW:{
+            return{...state, [action.review.id]: action.review}
+        }
         default:
             return state
     }

@@ -1,0 +1,43 @@
+.title{
+    display: flex;
+    justify-content: center;
+    color: goldenrod;
+    text-shadow: 0 0 0.5rem gray;
+}
+
+.Stars-field{
+display: flex;
+justify-content: center;
+margin-bottom: 6px;
+}
+
+
+.Stars{
+ color: red;
+ font-size: 30px;
+}
+
+.Review-form{
+    border:solid gray;
+    padding:30px;
+}
+
+.Btn-container{
+    display:flex;
+    justify-content: center;
+
+}
+
+.Submit-btn{
+border:none;
+border-radius: 30px;
+background-color: #2F4F4F;
+color: white;
+padding:10px;
+box-shadow: 0 0 0.75rem goldenrod;
+transition: box-shadow 0.3s ease;
+}
+
+/* .Submit-btn:active {
+    box-shadow: 0 0 4rem goldenrod;
+} */

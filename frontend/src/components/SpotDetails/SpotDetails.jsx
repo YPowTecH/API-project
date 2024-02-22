@@ -26,12 +26,12 @@ function SpotDetails() {
 
     function waitUser(currUser) {
         let currUserIsOwner
-        if (currUser && spot.Owner) {
+        if (currUser && spot?.Owner) {
             currUserIsOwner = currUser?.id === spot?.Owner.id
             return currUserIsOwner
         }
     }
-    console.log('up',waitUser(currUser))
+    console.log('up', waitUser(currUser))
 
     // const currUserIsOwner = currUser?.id === spot?.Owner.id
     // console.log('currUserOwner', currUserIsOwner)
@@ -49,6 +49,13 @@ function SpotDetails() {
         e.preventDefault();
         alert("Feature coming soon");
     };
+
+    //has a review alr
+    const hasReview = Object.values(review).find((review) =>
+        review.userId === waitUser(currUser) && review.spotId === parseInt(spotId)
+    )
+    console.log('review', review)
+    console.log('hasreview=>', hasReview)
 
     return (
         <>
@@ -95,8 +102,8 @@ function SpotDetails() {
                 </h2>
             </div>
             <div className='Post-review'>
-                {currUser && !waitUser(currUser) && (<OpenModalButton className='Button' buttonText='Post Your Review' modalComponent={<ReviewForm spotId={spotId}/>}/>
-            )}
+                {currUser && !waitUser(currUser) && !hasReview && (<OpenModalButton className='Button' buttonText='Post Your Review' modalComponent={<ReviewForm spotId={spotId} />} />
+                )}
             </div>
             <div className='Reviews-container'>
                 <div className='Review'>
