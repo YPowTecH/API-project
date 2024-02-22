@@ -1,14 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
-
+// import ManageSpots from '../ManageSpots/ManageSpots';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const navi = useNavigate()
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const currUser = useSelector((state) => state.session.user)
+
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -35,7 +40,12 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
+    navi('/')
   };
+
+  const closeSpot = () => {
+    closeMenu()
+  }
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
@@ -50,6 +60,10 @@ function ProfileButton({ user }) {
             <li>Username: {user.username}</li>
             <li>Hello, {user.firstName}</li>
             <li>Email: {user.email}</li>
+            {currUser && (
+              <li className='ManageSpots-container'>
+                <Link to='/spots/current' className='link' onClick={closeSpot}>Manage Spots</Link>
+              </li>)}
             <li>
               <button onClick={logout}>Log Out</button>
             </li>

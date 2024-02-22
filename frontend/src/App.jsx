@@ -9,6 +9,8 @@ import { Modal } from './context/Modal';
 import LandingPage from './components/LandingPage/LandingPage';
 import SpotDetails from './components/SpotDetails/SpotDetails'
 import CreateSpot from './components/CreateSpot/CreateSpot';
+import ManageSpots from './components/ManageSpots/ManageSpots';
+import UpdateSpot from './components/UpdateSpot/UpdateSpot';
 // import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 function Layout() {
@@ -57,8 +59,14 @@ const router = createBrowserRouter([
         path: '/spots/new',
         element: <CreateSpot />
       },
-
-      // {
+      {
+        path: '/spots/current',
+        element: <ManageSpots/>
+      },
+      {
+        path: '/spots/:spotId/edit',
+        element: <UpdateSpot />
+      },
       //   path: 'login',
       //   element: <LoginFormPage />
       // },
