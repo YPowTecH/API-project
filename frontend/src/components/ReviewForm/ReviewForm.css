@@ -25,7 +25,6 @@ margin-bottom: 6px;
 .Btn-container{
     display:flex;
     justify-content: center;
-
 }
 
 .Submit-btn{
@@ -36,8 +35,9 @@ color: white;
 padding:10px;
 box-shadow: 0 0 0.75rem goldenrod;
 transition: box-shadow 0.3s ease;
+cursor: pointer;
 }
 
-/* .Submit-btn:active {
+.Submit-btn:active {
     box-shadow: 0 0 4rem goldenrod;
-} */
+}

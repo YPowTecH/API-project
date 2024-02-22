@@ -22,14 +22,14 @@ module.exports = {
         email: 'BigJarAlexander@user.io',
         username: 'IronFistJarrior',
         firstName: 'Alexander',
-        lastName:'Warrior-Jar',
+        lastName:'WarriorJar',
         hashedPassword: bcrypt.hashSync('password2')
       },
       {
         email: 'CoolWolfDude@user.io',
         username: 'FaithfulShadow',
         firstName: 'Blaidd',
-        lastName:'Half-Wolf',
+        lastName:'HalfWolf',
         hashedPassword: bcrypt.hashSync('password3')
       }
     ], { validate: true }).catch(err=>{

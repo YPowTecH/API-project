@@ -45,7 +45,7 @@ module.exports = {
       },
       {
         spotId: 2,
-        url: 'https://res.cloudinary.com/dxdktlvbj/image/upload/v1708379654/EagbrX2_inafoh.png',
+        url: 'https://res.cloudinary.com/dxdktlvbj/image/upload/v1708379654/ELDEN%20LOUNGE/jarburg/EagbrX2_inafoh.png',
         preview: true
       },
       {
@@ -70,7 +70,7 @@ module.exports = {
       },
       {
         spotId: 3,
-        url: 'https://res.cloudinary.com/dxdktlvbj/image/upload/v1708379659/7ffkBN3_sx8j8l.png',
+        url: 'https://res.cloudinary.com/dxdktlvbj/image/upload/v1708379659/ELDEN%20LOUNGE/Ranni%27s%20Rise/7ffkBN3_sx8j8l.png',
         preview: true
       },
       {
@@ -95,7 +95,7 @@ module.exports = {
       },
       {
         spotId: 4,
-        url: 'https://res.cloudinary.com/dxdktlvbj/image/upload/v1708379664/1g1JkKu_cpsrdf.png',
+        url: 'https://res.cloudinary.com/dxdktlvbj/image/upload/v1708379664/ELDEN%20LOUNGE/Leyndell%2C%20Royal%20Capital/1g1JkKu_cpsrdf.png',
         preview: true
       },
       {
@@ -120,7 +120,7 @@ module.exports = {
       },
       {
         spotId: 5,
-        url: 'https://res.cloudinary.com/dxdktlvbj/image/upload/v1708379669/kC2h8su_z99jpl.png',
+        url: 'https://res.cloudinary.com/dxdktlvbj/image/upload/v1708379669/ELDEN%20LOUNGE/Ordina%2C%20Liturgical%20Town/kC2h8su_z99jpl.png',
         preview: true
       },
       {
@@ -145,7 +145,7 @@ module.exports = {
       },
       {
         spotId: 6,
-        url: 'https://res.cloudinary.com/dxdktlvbj/image/upload/v1708379675/h3gQG1H_gp3db6.png',
+        url: 'https://res.cloudinary.com/dxdktlvbj/image/upload/v1708379675/ELDEN%20LOUNGE/Nokron%20Eternal%20City/h3gQG1H_gp3db6.png',
         preview: true
       },
       {

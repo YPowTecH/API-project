@@ -28,12 +28,12 @@ const validateSpots = [
         .isString()
         .notEmpty()
         .withMessage('Country is required'),
-    check('lat')
-        .isFloat({ min: -90, max: 90 })
-        .withMessage("Latitude must be within -90 and 90"),
-    check('lng')
-        .isFloat({ min: -180, max: 180 })
-        .withMessage("Longitude must be within -180 and 180"),
+    // check('lat')
+    //     .isFloat({ min: -90, max: 90 })
+    //     .withMessage("Latitude must be within -90 and 90"),
+    // check('lng')
+    //     .isFloat({ min: -180, max: 180 })
+    //     .withMessage("Longitude must be within -180 and 180"),
     check('name')
         .isLength({ max: 49 })
         .isString()
@@ -88,11 +88,11 @@ const validateDates = [
 const validateQueryFilters = [
     query('page')
         .optional()
-        .isInt({min:1})
+        .isInt({ min: 1 })
         .withMessage("Page must be greater than or equal to 1"),
     query('size')
         .optional()
-        .isInt({min:1})
+        .isInt({ min: 1 })
         .withMessage("Size must be greater than or equal to 1"),
     query('maxLat')
         .optional()
@@ -118,7 +118,7 @@ const validateQueryFilters = [
         .optional()
         .isFloat({ min: 0 })
         .withMessage("Maximum price must be greater than or equal to 0"),
-handleValidationErrors
+    handleValidationErrors
 ]
 
 //Get all spots by logged user
@@ -363,7 +363,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     }
 
     const spotImage = await SpotImage.create({
-        [["spotId", "id"]]: spotId.id,
+        spotId: req.params.spotId,
         url,
         preview,
     })
@@ -528,17 +528,17 @@ router.post('/', [requireAuth, validateSpots], async (req, res) => {
 
 // Get all spots
 router.get('/', validateQueryFilters, async (req, res) => {
-let { page, size, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query
+    let { page, size, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query
     let pagination = {}
-    if(!page) page = 1
-    if(!size) size = 20
-    if(page > 10) page = 10
-    if(size > 20) size = 20
+    if (!page) page = 1
+    if (!size) size = 20
+    if (page > 10) page = 10
+    if (size > 20) size = 20
 
     pagination.limit = size
-    pagination.offset = size * (page -1)
+    pagination.offset = size * (page - 1)
 
-    if(parseInt(size)<=0||page<=0){
+    if (parseInt(size) <= 0 || page <= 0) {
         delete pagination.page
         delete pagination.size
     }

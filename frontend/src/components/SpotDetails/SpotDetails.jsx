@@ -24,21 +24,23 @@ function SpotDetails() {
     const currUser = useSelector((state) => state.session.user)
     console.log('curruser=>', currUser)
 
-    function waitUser(currUser) {
+    function isOwner(currUser) {
         let currUserIsOwner
         if (currUser && spot?.Owner) {
             currUserIsOwner = currUser?.id === spot?.Owner.id
             return currUserIsOwner
         }
     }
-    console.log('up', waitUser(currUser))
+    console.log('isOwner', isOwner(currUser))
 
     // const currUserIsOwner = currUser?.id === spot?.Owner.id
     // console.log('currUserOwner', currUserIsOwner)
 
     useEffect(() => {
-        dispatch(thunkSpotDetails(spotId));
+        dispatch(thunkSpotDetails(spotId))
+        console.log('Before dispatch:', review);
         dispatch(thunkLoadReviews(spotId))
+        console.log('After dispatch:', review)
     }, [dispatch, spotId]) //reviewArray.length
 
     if (!spot || !spot.SpotImages) {
@@ -52,7 +54,8 @@ function SpotDetails() {
 
     //has a review alr
     const hasReview = Object.values(review).find((review) =>
-        review.userId === waitUser(currUser) && review.spotId === parseInt(spotId)
+        review.userId === currUser?.id && review.spotId === parseInt(spotId)
+        // isOwner(currUser) === true && review.spotId === parseInt(spotId)
     )
     console.log('review', review)
     console.log('hasreview=>', hasReview)
@@ -102,7 +105,7 @@ function SpotDetails() {
                 </h2>
             </div>
             <div className='Post-review'>
-                {currUser && !waitUser(currUser) && !hasReview && (<OpenModalButton className='Button' buttonText='Post Your Review' modalComponent={<ReviewForm spotId={spotId} />} />
+                {currUser && !isOwner(currUser) && !hasReview && (<OpenModalButton className='Button' buttonText='Post Your Review' modalComponent={<ReviewForm spotId={spotId} />} />
                 )}
             </div>
             <div className='Reviews-container'>

@@ -12,20 +12,22 @@ const ReviewForm = ({ spotId }) => {
     const [stars, setStars] = useState(null)
     const [hover, setHover] = useState(null)
     const [validations, setValidations] = useState({})
-
+    const { closeModal } = useModal()
+    console.log('modal',useModal())
     const handleSubmit = async (e) => {
         e.preventDefault()
         const formData = {
             review,
             stars
         }
-        await dispatch(thunkCreateReview(spotId, formData))
-        .then(() => {
-          closeModal()
-        })
-        .catch(() => {
-          setValidations({ message: "Review already exists for this spot" })
-        })
+        try {
+            await dispatch(thunkCreateReview(spotId, formData));
+            await dispatch(thunkLoadReviews(spotId));
+            closeModal();
+        } catch (error) {
+            setValidations({ message: "Review already exists for this spot" });
+            console.error("Error creating review:", error);
+        }
 
       await dispatch(thunkLoadReviews(spotId))
     }
@@ -33,7 +35,7 @@ const ReviewForm = ({ spotId }) => {
     return (
         <form onSubmit={handleSubmit} className='Review-form'>
             <h1 className='title'>How was your stay?</h1>
-            {"message" in validations&& <p>{validations.message}</p>}
+            {"message" in validations && <p>{validations.message}</p>}
             <textarea
                 type='text'
                 name='review'
