@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useModal } from '../../context/Modal'
 import { thunkCreateReview } from '../../store/reviews'
 import { thunkLoadReviews } from '../../store/reviews'
-import { thunkLoadSpots } from '../../store/spots'
+// import { thunkLoadSpots } from '../../store/spots'
 // import { useNavigate } from 'react-router-dom'
 import './ReviewForm.css'
 

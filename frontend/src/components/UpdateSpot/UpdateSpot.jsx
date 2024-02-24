@@ -95,7 +95,7 @@ const UpdateSpot = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setSubmitted(true)
-        console.log(Object.keys(validations))
+        // console.log(Object.keys(validations))
         if (!Object.keys(validations).length) {
             const updateSpot = await dispatch(
                 thunkUpdateSpot({
@@ -118,8 +118,8 @@ const UpdateSpot = () => {
             })
             console.log('spot->', spot)
             // const imgArray = [img0, img1, img2, img3, img4]
-            // await dispatch(thunkUpdateImage(spot.id, imgArray))
-            navi(`/spots/${updateSpot.id}`)
+            // await dispatch(thunkUpdateImage(spotId, imgArray))
+            navi(`/spots/${spotId}`)
         }
     }
 

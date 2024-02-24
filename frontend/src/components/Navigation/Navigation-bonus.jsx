@@ -5,7 +5,7 @@ import './Navigation.css';
 import './Navigation-bonus.css'
 
 function Navigation({ isLoaded }) {
-  const sessionUser = useSelector(state => state.session.user);
+  const currUser = useSelector(state => state.session.user);
 
   return (
     <div className='Navigation-Header'>
@@ -14,12 +14,12 @@ function Navigation({ isLoaded }) {
       </div>
       <div className='R-Navigation-Header'>
         <div className='Create-spot-container'>
-          {sessionUser && (<NavLink to='/spots/new' className='create'>Create a New Spot</NavLink>
+          {currUser && (<NavLink to='/spots/new' className='create'>Create a New Spot</NavLink>
           )}
         </div>
         <div className='User'>
           {isLoaded && (
-            <ProfileButton user={sessionUser} />
+            <ProfileButton user={currUser} />
           )}
         </div>
       </div>

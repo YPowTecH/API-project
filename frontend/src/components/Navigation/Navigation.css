@@ -1,9 +1,17 @@
 .profile-dropdown {
-  position: relative;
+  position: absolute;
   width: 200px;
+  height: 200px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin-right: 30px;
+  margin-bottom: 30px;
+  top: 5%;
+  right: 1%;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  display: flex;
+  margin-right: 20px;
 }
+
 
 .hidden {
   display: none;

@@ -101,8 +101,8 @@ export const thunkCreateSpot = (spot) => async (dispatch) => {
 }
 
 export const thunkCreateSpotImage = (spotId, images) => async (dispatch) => {
-    console.log('spotId=>>>', spotId)
-    console.log('images=>>>', images)
+    // console.log('spotId=>>>', spotId)
+    // console.log('images=>>>', images)
 
     const imgArray = []
     for (let image of images) {
@@ -124,7 +124,8 @@ export const thunkCreateSpotImage = (spotId, images) => async (dispatch) => {
 }
 
 export const thunkDeleteSpot = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spot.id}`, {
+    // console.log('spotid=>', spot)
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     })
 

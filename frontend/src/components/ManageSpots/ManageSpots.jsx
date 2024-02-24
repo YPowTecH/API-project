@@ -1,4 +1,4 @@
-import { useEffect, useInsertionEffect } from "react"
+import { useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkLoadSpots } from "../../store/spots"
 import { NavLink } from "react-router-dom"
@@ -17,16 +17,23 @@ const ManageSpots = () => {
     const ownerSpots = spotsArray.filter((spot) => spot.ownerId === currUser.id)
     console.log('do i own these', ownerSpots)
 
+    
+
+    //create new ref for refresh
+
     useEffect(() => {
         dispatch(thunkLoadSpots())
     }, [dispatch])
 
+    // const DeleteSpot = (spotId) =>{
+    //     dispatch(thunkDeleteSpot(spotId))
+    // }
 
     return (
         <div className='ManageSpot-container'>
             <div className='Title-container'>
                 <h1>Manage Spots</h1>
-                <button>
+                <button className ='Create-btn'>
                     <NavLink to='/spots/new' className='Spots'>
                         Create a New Spot
                     </NavLink>
@@ -48,10 +55,11 @@ const ManageSpots = () => {
                         </NavLink>
                         <div className='Btn-container'>
                             <button>
-                                <NavLink to={`/spots/${spot.id}/edit`}>Update</NavLink>
+                                <NavLink className = 'Update-btn' to={`/spots/${spot.id}/edit`}>Update</NavLink>
                             </button>
                             <OpenModalButton
                                 buttonText='Delete'
+                                className = 'Delete-btn'
                                 modalComponent={<DeleteSpot spot={spot} />}
                             />
                         </div>

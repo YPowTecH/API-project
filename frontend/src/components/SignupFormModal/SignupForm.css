@@ -1,0 +1,21 @@
+.Form-container{
+   display: flex;
+   flex-direction: column;
+   width: 90%;
+   padding: 20px;
+}
+
+.Fill-in-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px;
+    padding-right: 30px;
+}
+
+.Sign-up-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 70px;
+}

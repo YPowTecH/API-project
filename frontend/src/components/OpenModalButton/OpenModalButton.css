@@ -1,0 +1,15 @@
+.Modal-btn{
+    width: 150px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+}
+
+.Modal-btn:hover{
+    background-color: #e0e0e0;
+    box-shadow: 0 0 1rem goldenrod;
+    cursor: pointer;
+    color: black;
+}

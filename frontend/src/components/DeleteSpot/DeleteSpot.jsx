@@ -9,7 +9,7 @@ const DeleteSpot = ({spot}) =>{
 
     const onDelete=(e)=>{
         e.preventDefault()
-        dispatch(thunkDeleteSpot(spot))
+        dispatch(thunkDeleteSpot(spot.id))
         closeModal()
     }
 

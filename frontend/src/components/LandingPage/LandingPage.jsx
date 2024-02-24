@@ -24,7 +24,7 @@ function LandingPage() {
                             <img className='image' src={`${spot.previewImage}`} />
                             <div className='Review-location-container'>
                                 <div className="location">{`${spot.city}`}, {`${spot.state}`}</div>
-                                <div className="review">★{spot.avgRating > 0 ? spot.avgRating.toFixed(1): 'New'}</div>
+                                <div className="review">★{spot.avgRating > 0 ? spot.avgRating.toFixed(1) : 'New'}</div>
                             </div>
                             <div className="price">{`$${spot.price} night`}</div>
                         </div>

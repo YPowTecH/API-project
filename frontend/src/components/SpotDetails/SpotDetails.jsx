@@ -23,7 +23,7 @@ function SpotDetails() {
     const reviewArray = Object.values(review)
     // console.log('rev arr=>', reviewArray)
     const imgArray = spot?.SpotImages
-    // console.log('imgarr', imgArray)
+    console.log('imgarr', imgArray)
     const currUser = useSelector((state) => state.session.user)
     console.log('curruser=>', currUser)
 
@@ -60,8 +60,9 @@ function SpotDetails() {
         review.userId === currUser?.id && review.spotId === parseInt(spotId)
         // isOwner(currUser) === true && review.spotId === parseInt(spotId)
     )
-    console.log('review', review)
-    console.log('hasreview=>', hasReview)
+    // console.log('review', review)
+    // console.log('hasreview=>', hasReview)
+
 
     return (
         <>
@@ -73,13 +74,15 @@ function SpotDetails() {
             </div>
             <div className='Image-container' >
                 <img className='BigImage' src={spot?.SpotImages && imgArray[0].url} />
+                {imgArray && imgArray.length > 1 && (
                 <div className='SmallImage-container'>
                     {imgArray && imgArray.slice(1).map((img) => (
                         <div key={img.id}>
-                            <img className='SmallImages' src={img?.url} />
+                            {img?.url === null ? "" : <img className='SmallImages' src={img?.url} />}
                         </div>
                     ))}
                 </div>
+                )}
             </div>
             <div className='Blurb-container'>
                 <div className='Description-container'>
