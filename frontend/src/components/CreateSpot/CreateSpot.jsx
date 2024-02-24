@@ -119,107 +119,120 @@ const CreateSpot = () => {
     }
 
     return (
+        <>
         <div className='Form-container'>
             <form className='Form' onSubmit={handleSubmit}>
                 <h1 className='Title'>Create a New Spot</h1>
                 <div className='Section1'>
                     <h2>Where's your place located?</h2>
-                    <p>Guests will only get your exact address once they booked a reservation</p>
+                    <p className='Form-desc'>Guests will only get your exact address once they booked a reservation</p>
                     <div>
                         <label>Country</label>
-                        <input type='text' name='country' placeholder='Enter a country' value={country} onChange={(e)=>setCountry(e.target.value)}></input>
                     </div>
+                    <input type='text' name='country' placeholder='Enter a country' value={country} onChange={(e) => setCountry(e.target.value)}></input>
                     <div className='Form-errors'>
-                    {submitted && 'country' in validations && (<p>{validations.country}</p>)}
+                        {submitted && 'country' in validations && (<p>{validations.country}</p>)}
                     </div>
                     <div>
                         <label>Street Address</label>
-                        <input type='text' name='address' placeholder='Enter an address' value={address} onChange={(e)=>setAddress(e.target.value)}></input>
                     </div>
+                    <input type='text' name='address' placeholder='Enter an address' value={address} onChange={(e) => setAddress(e.target.value)}></input>
                     <div className='Form-errors'>
-                    {submitted && 'address' in validations && (<p>{validations.address}</p>)}
+                        {submitted && 'address' in validations && (<p>{validations.address}</p>)}
                     </div>
-                    <div>
-                        <label>City</label>
-                        <input type='text' name='city' placeholder='Enter a city' value={city} onChange={(e)=>setCity(e.target.value)}></input>
+
+                    <div className='Inline-label'>
+                        <div>
+                            <label className='Text-above-label'>City</label>
+                            <input className='City-input' type='text' name='city' placeholder='Enter a city' value={city} onChange={(e) => setCity(e.target.value)}></input>
+                            <div className='Form-errors'>
+                                {submitted && 'city' in validations && (<p>{validations.city}</p>)}
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className='Text-above-label Text-above-label-adjust'>State</label>
+                           <div>, &nbsp;&nbsp;
+                            <input type='text' name='state' placeholder='Enter a state' value={state} onChange={(e) => setState(e.target.value)}></input>
+                            </div>
+                            <div className='Form-errors'>
+                                {submitted && 'state' in validations && (<p>{validations.state}</p>)}
+                            </div>
+                        </div>
                     </div>
-                    <div className='Form-errors'>
-                    {submitted && 'city' in validations && (<p>{validations.city}</p>)}
-                    </div>
-                    <div>
-                        <label>State</label>
-                        <input type='text' name='state' placeholder='Enter a state' value={state} onChange={(e)=>setState(e.target.value)}></input>
-                    </div>
-                    <div className='Form-errors'>
-                    {submitted && 'state' in validations && (<p>{validations.state}</p>)}
-                    </div>
-                    <div>
-                        <label>Latitude</label>
-                        <input type='text' name='lat' placeholder='Enter a latitude' value={lat} min={-90} max={90} onChange={(e)=>setLat(e.target.value)}></input>
-                    </div>
-                    <div>
-                        <label>Longitude</label>
-                        <input type='text' name='lng' placeholder='Enter a longitude' value={lng} min={-180} max={180} onChange={(e)=>setLng(e.target.value)}></input>
+                    <div className='Inline-label'>
+                        <div>
+                            <label className='Text-above-label'>Latitude</label>
+                        <input className='Lat-Lon-input' type='text' name='lat' placeholder='Enter a latitude' value={lat} min={-90} max={90} onChange={(e) => setLat(e.target.value)}></input>
+                        </div>
+                        <div>
+                            <label className='Text-above-label Text-above-label-adjust'>Longitude</label>
+                        <div>, &nbsp;&nbsp;<input className='Lat-Lon-input' type='text' name='lng' placeholder='Enter a longitude' value={lng} min={-180} max={180} onChange={(e) => setLng(e.target.value)}></input>
+                        </div>
+                        </div>
                     </div>
                 </div>
+                <hr className='Section-line' />
                 <div className='Section2'>
                     <h2>Describe your place to guests</h2>
-                    <p>Describe your place to guests", a caption of "Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
-                    <textarea name='description' placeholder='Please write at least 30 characters' rows='10' cols='100' value={description} onChange={(e)=>setDescription(e.target.value)}></textarea>
+                    <p className='Form-desc'>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
+                    <textarea name='description' placeholder='Please write at least 30 characters' rows='10' cols='100' value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                 </div>
                 <div className='Form-errors'>
-                {submitted && 'description' in validations && (<p>{validations.description}</p>)}
+                    {submitted && 'description' in validations && (<p>{validations.description}</p>)}
                 </div>
-
+                <hr className='Section-line' />
                 <div className='Section3'>
                     <h2>Create a title for your spot</h2>
-                    <p>Catch guests' attention with a spot title that highlights what makes your place special.</p>
-                    <input type='text' name='name' placeholder='Name of your spot' value={name} onChange={(e)=>setName(e.target.value)}></input>
+                    <p className='Form-desc'>Catch guests' attention with a spot title that highlights what makes your place special.</p>
+                    <input className= 'Input-rest' type='text' name='name' placeholder='Name of your spot' value={name} onChange={(e) => setName(e.target.value)}></input>
                 </div>
                 <div className='Form-errors'>
-                {submitted && 'name' in validations && (<p>{validations.name}</p>)}
+                    {submitted && 'name' in validations && (<p>{validations.name}</p>)}
                 </div>
-
+                <hr className='Section-line' />
                 <div className='Section4'>
                     <h2>Set a base price for your spot</h2>
-                    <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
+                    <p className='Form-desc'>Competitive pricing can help your listing stand out and rank higher in search results.</p>
                     <div>
-                    $ <input type='number' name='price' placeholder='Price per night (USD)' value={price} onChange={(e)=>setPrice(e.target.value)}></input>
+                        $ <input className= 'Input-rest' type='number' name='price' placeholder='Price per night (USD)' value={price} onChange={(e) => setPrice(e.target.value)}></input>
                     </div>
                 </div>
                 <div className='Form-errors'>
-                {submitted && 'price' in validations && (<p>{validations.price}</p>)}
+                    {submitted && 'price' in validations && (<p>{validations.price}</p>)}
                 </div>
-
+                <hr className='Section-line' />
                 <div className='Section5'>
                     <h2>Liven up your spot with photos</h2>
-                    <p>Submit a link to at least one photo to publish your spot.</p>
-                    <input type='text' name='img0' placeholder='Preview Image URL' value={img0} onChange={(e)=>setImg0(e.target.value)}></input>
+                    <p className='Form-desc'>Submit a link to at least one photo to publish your spot.</p>
+                    <input className= 'Input-rest' type='text' name='img0' placeholder='Preview Image URL' value={img0} onChange={(e) => setImg0(e.target.value)}></input>
                     <div className='Form-errors'>
-                    {submitted && 'img0' in validations && (<p>{validations.img0}</p>)}
+                        {submitted && 'img0' in validations && (<p>{validations.img0}</p>)}
                     </div>
-                    <input type='text' name='img1' placeholder='Image URL'value={img1} onChange={(e)=>setImg1(e.target.value)}></input>
+                    <input className= 'Input-rest' type='text' name='img1' placeholder='Image URL' value={img1} onChange={(e) => setImg1(e.target.value)}></input>
                     <div className='Form-errors'>
-                    {submitted && 'img1' in validations && (<p>{validations.img1}</p>)}
+                        {submitted && 'img1' in validations && (<p>{validations.img1}</p>)}
                     </div>
-                    <input type='text' name='img2' placeholder='Image URL'value={img2} onChange={(e)=>setImg2(e.target.value)}></input>
+                    <input className= 'Input-rest' type='text' name='img2' placeholder='Image URL' value={img2} onChange={(e) => setImg2(e.target.value)}></input>
                     <div className='Form-errors'>
-                    {submitted && 'img2' in validations && (<p>{validations.img2}</p>)}
+                        {submitted && 'img2' in validations && (<p>{validations.img2}</p>)}
                     </div>
-                    <input type='text' name='img3' placeholder='Image URL'value={img3} onChange={(e)=>setImg3(e.target.value)}></input>
+                    <input className= 'Input-rest' type='text' name='img3' placeholder='Image URL' value={img3} onChange={(e) => setImg3(e.target.value)}></input>
                     <div className='Form-errors'>
-                    {submitted && 'img3' in validations && (<p>{validations.img3}</p>)}
+                        {submitted && 'img3' in validations && (<p>{validations.img3}</p>)}
                     </div>
-                    <input type='text' name='img4' placeholder='Image URL'value={img4} onChange={(e)=>setImg4(e.target.value)}></input>
+                    <input className= 'Input-rest' type='text' name='img4' placeholder='Image URL' value={img4} onChange={(e) => setImg4(e.target.value)}></input>
                     <div className='Form-errors'>
-                    {submitted && 'img4' in validations && (<p>{validations.img4}</p>)}
+                        {submitted && 'img4' in validations && (<p>{validations.img4}</p>)}
                     </div>
                 </div>
+                <hr className='Section-line' />
                 <div className='Submit-button'>
-                    <button type="submit">Create Spot</button>
+                    <button className='Submit-btn' type="submit">Create Spot</button>
                 </div>
             </form>
         </div>
+        </>
     )
 }
 
