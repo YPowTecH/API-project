@@ -37,7 +37,7 @@ const UpdateSpot = () => {
     // console.log('spotsImgArr', spotImagesArray)
     console.log('spot=>', spot?.SpotImages)
 
-
+    console.log(setImg1,setImg2,setImg3,setImg4)
 
     // useEffect(() => {
     //     setImg0(spot?.SpotImages[0]?.url)
@@ -105,7 +105,7 @@ const UpdateSpot = () => {
 
 
 
-    }, [spot?.SpotImages?.length, country, address, city, state, description, name, price, img0, img1, img2, img3, img4])
+    }, [dispatch, spotId, spot?.SpotImages?.length, country, address, city, state, description, name, price, img0, img1, img2, img3, img4])
 
     // if (!spot || !spot.SpotImages) {
     //     return <div>Loading...</div>
@@ -117,11 +117,12 @@ const UpdateSpot = () => {
         const newUrl = url.toLowerCase()
         return fileType.some(type => newUrl.endsWith(type))
     }
-
+    console.log(validImg)
     const handleSubmit = async (e) => {
         e.preventDefault()
         setSubmitted(true)
         // console.log(Object.keys(validations))
+
         if (!Object.keys(validations).length) {
             const updateSpot = await dispatch(
                 thunkUpdateSpot({
@@ -143,10 +144,12 @@ const UpdateSpot = () => {
                 }
             })
             console.log('spot->', spot)
+            console.log(updateSpot)
             // const imgArray = [img0, img1, img2, img3, img4]
             // await dispatch(thunkUpdateImage(spotId, imgArray))
             navi(`/spots/${spotId}`)
         }
+
     }
 
 
@@ -158,7 +161,7 @@ const UpdateSpot = () => {
                     <form className='Form' onSubmit={handleSubmit}>
                         <h1 className='Title'>Update your Spot</h1>
                         <div className='Section1'>
-                            <h2>Where's your place located?</h2>
+                            <h2>Where&apos;s your place located?</h2>
                             <p className='Form-desc'>Guests will only get your exact address once they booked a reservation</p>
                             <div>
                                 <label>Country</label>
@@ -218,7 +221,7 @@ const UpdateSpot = () => {
                         <hr className='Section-line' />
                         <div className='Section3'>
                             <h2>Create a title for your spot</h2>
-                            <p className='Form-desc'>Catch guests' attention with a spot title that highlights what makes your place special.</p>
+                            <p className='Form-desc'>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
                             <input className='Input-rest' type='text' name='name' placeholder='Name of your spot' value={name} onChange={(e) => setName(e.target.value)}></input>
                         </div>
                         <div className='Form-errors'>
@@ -240,7 +243,7 @@ const UpdateSpot = () => {
                             <h2>Liven up your spot with photos</h2>
                             <p className='Form-desc'>Submit a link to at least one photo to publish your spot.</p>
                                 {spot.SpotImages.map((spotimg) => (
-                                    <input className='Input-rest' type='text' name='img0' placeholder='Preview Image URL' value={spotimg.url} onChange={(e) => setImg0(e.target.value)}></input>
+                                    <input key={spotimg.url} className='Input-rest' type='text' name='img0' placeholder='Preview Image URL' value={spotimg.url} onChange={(e) => setImg0(e.target.value)}></input>
                                 ))}
 
                             {/* <input className='Input-rest' type='text' name='img0' placeholder='Preview Image URL' value={img0} onChange={(e) => setImg0(e.target.value)}></input>

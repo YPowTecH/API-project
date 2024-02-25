@@ -1,6 +1,5 @@
-import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useDispatch} from 'react-redux'
 import { useModal } from '../../context/Modal'
 import { thunkCreateReview } from '../../store/reviews'
 import { thunkLoadReviews } from '../../store/reviews'
@@ -17,7 +16,7 @@ const ReviewForm = ({ spotId }) => {
     const [validations, setValidations] = useState({})
     const { closeModal } = useModal()
     const [submitted, setSubmitted] = useState(false)
-
+    console.log(submitted)
     // console.log('modal',useModal())
     const handleSubmit = async (e) => {
         e.preventDefault()

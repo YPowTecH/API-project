@@ -124,7 +124,7 @@ const CreateSpot = () => {
             <form className='Form' onSubmit={handleSubmit}>
                 <h1 className='Title'>Create a New Spot</h1>
                 <div className='Section1'>
-                    <h2>Where's your place located?</h2>
+                    <h2>Where&apos;s your place located?</h2>
                     <p className='Form-desc'>Guests will only get your exact address once they booked a reservation</p>
                     <div>
                         <label>Country</label>
@@ -184,7 +184,7 @@ const CreateSpot = () => {
                 <hr className='Section-line' />
                 <div className='Section3'>
                     <h2>Create a title for your spot</h2>
-                    <p className='Form-desc'>Catch guests' attention with a spot title that highlights what makes your place special.</p>
+                    <p className='Form-desc'>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
                     <input className= 'Input-rest' type='text' name='name' placeholder='Name of your spot' value={name} onChange={(e) => setName(e.target.value)}></input>
                 </div>
                 <div className='Form-errors'>

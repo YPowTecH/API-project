@@ -1,5 +1,4 @@
 import { useModal } from '../../context/Modal';
-import { useState } from 'react';
 import './OpenModalButton.css'
 
 function OpenModalButton({
