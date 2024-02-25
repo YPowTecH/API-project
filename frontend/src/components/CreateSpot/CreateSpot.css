@@ -1,0 +1,89 @@
+.Form-container {
+    display: flex;
+    background-color: rgba(230, 229, 229, 0.5);
+    justify-content: center;
+    align-items: center;
+    margin-left: 55px;
+    border-radius: 20px;
+}
+
+.Title {
+    color: goldenrod;
+    text-shadow: 2px 2px 4px goldenrod;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Form-desc {
+    font-size: 20px;
+    color: goldenrod;
+    text-shadow: 2px 2px 4px black
+}
+
+.Form-errors {
+    color: red;
+    text-shadow: 2px 2px 4px black;
+}
+
+.Section1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.Inline-label {
+    display: flex;
+}
+
+.Text-above-label {
+    display: flex;
+}
+
+.Text-above-label-adjust{
+    margin-left: 15px;
+}
+
+.Section-line {
+    margin-top: 30px;
+    width: 1000px;
+    border-color: rgba(165, 165, 165, 0.5);
+}
+
+.City-input{
+    width:350px;
+}
+
+.Lat-Lon-input{
+    width:260px
+}
+
+.Section2,
+.Section3,
+.Section4,
+.Section5 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.Section1 h2,
+.Section2 h2,
+.Section3 h2,
+.Section4 h2,
+.Section5 h2 {
+    color: rgb(7, 23, 22);
+    text-shadow: 2px 2px 4px white;
+}
+
+
+.Submit-button {
+    margin-top: 10px;
+}
+
+.Input-rest{
+    width:500px;
+}

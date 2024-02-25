@@ -24,6 +24,12 @@ module.exports = {
       stars: 1
     },
     {
+      spotId:1,
+      userId:2,
+      review: 'Awesome!',
+      stars: 3
+    },
+    {
       spotId:2,
       userId:3,
       review: 'Great place to relax with the local, Jar Bairn in particular is a great host',

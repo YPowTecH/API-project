@@ -20,12 +20,12 @@ const validateSpots = [
     check('country')
         .exists({ checkFalsy: true })
         .withMessage('Country is required'),
-    check('lat')
-        .isFloat({ min: -90, max: 90 })
-        .withMessage("Latitude must be within -90 and 90"),
-    check('lng')
-        .isFloat({ min: -180, max: 180 })
-        .withMessage("Longitude must be within -180 and 180"),
+    // check('lat')
+    //     .isFloat({ min: -90, max: 90 })
+    //     .withMessage("Latitude must be within -90 and 90"),
+    // check('lng')
+    //     .isFloat({ min: -180, max: 180 })
+    //     .withMessage("Longitude must be within -180 and 180"),
     check('name')
         .isLength({ max: 50 })
         .withMessage("Name must be less than 50 characters"),
@@ -417,9 +417,7 @@ router.get('/:spotId', async (req, res) => {
     spot.setDataValue('avgStarRating', avgRating)
     spot.setDataValue('SpotImages', imgurl)
     spot.setDataValue('Owner', owner)
-    if (spot.lat) spot.lat = parseFloat(spot.lat)
-    if (spot.lng) spot.lng = parseFloat(spot.lng)
-    if (spot.price) spot.price = parseFloat(spot.price)
+
 
 
     res.json(spot)
@@ -536,15 +534,10 @@ router.post('/', [requireAuth, validateSpots], async (req, res) => {
 router.get('/', validateQueryFilters, async (req, res) => {
     let { page, size, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query
     let pagination = {}
-    const queryObj = {
-        where: {
-
-        }
-    }
-    if (!page) page = 1
-    if (!size) size = 20
-    if (page > 10) page = 10
-    if (size > 20) size = 20
+    if(!page) page = 1
+    if(!size) size = 20
+    if(page > 10) page = 10
+    if(size > 20) size = 20
 
     pagination.limit = size
     pagination.offset = size * (page - 1)

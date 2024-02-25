@@ -1,0 +1,107 @@
+.Header-container {
+    display: block;
+    margin: 20px;
+    padding-left: 75px;
+}
+
+.Spot-title {
+    color: goldenrod;
+    font-size: 29px;
+    text-shadow: 2px 2px 4px rgb(7, 23, 22);
+}
+
+.Spot-Location {
+    color: goldenrod;
+    font-size: 19px;
+    text-shadow: 2px 2px 4px goldenrod;
+}
+
+.Image-container {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.BigImage {
+    width: 900px;
+    height: 510px;
+    padding: 5px;
+}
+
+.SmallImage-container {
+    display: grid;
+    gap: 5px;
+    padding: 5px;
+    grid-template-columns: 1fr 1fr
+}
+
+.SmallImages {
+    width: 400px;
+    height: 250px;
+}
+
+.Description-container {
+    padding-left: 90px;
+    width: 80%;
+}
+
+.Host {
+    color: goldenrod;
+    font-size: 25px;
+    text-shadow: 2px 2px 4px rgb(7, 23, 22);
+}
+
+.Paragraph {
+    color: white;
+    text-shadow: 2px 2px 4px black;
+}
+
+.ReviewTitle-container {
+    padding-left: 90px;
+    color: goldenrod;
+    text-shadow: 2px 2px 4px black;
+}
+
+.Post-review {
+    margin-left: 90px;
+}
+
+.Review-hr {
+    border-color: rgba(218, 165, 32, 0.5);
+}
+
+.PRR-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 5px;
+}
+
+.Blurb-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    justify-content: center;
+}
+
+.Callout-container {
+    padding: 15px;
+    margin-right: 90px;
+    color: goldenrod
+}
+
+.Details-price {
+    color: white;
+    text-shadow: 2px 2px 4px black;
+}
+
+.Reserve-button {
+    width: 100%;
+    background-color: goldenrod;
+    color: rgb(7, 23, 22);
+    box-shadow: 0 0 1rem goldenrod;
+    margin: 3px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

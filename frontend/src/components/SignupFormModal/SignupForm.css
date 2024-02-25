@@ -1,0 +1,42 @@
+.Signup-form-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    align-items: center;
+    color: goldenrod;
+    text-shadow: 2px 2px 4px goldenrod;
+}
+
+.Signup-form {
+    border-radius: 8px;
+}
+
+.Fill-in-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px;
+}
+
+.Sign-up-btn {
+    margin-left: 20px;
+    width: 175px;
+    border:none;
+    border-radius: 30px;
+    background-color: #2F4F4F;
+    color: white;
+    transition: box-shadow 0.3s ease;
+}
+
+.Sign-up-btn:hover{
+    box-shadow: 0 0 1rem goldenrod;
+}
+
+.errors {
+    color: red;
+    text-shadow: 2px 2px 4px black;
+
+}
