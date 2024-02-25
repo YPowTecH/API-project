@@ -1,0 +1,61 @@
+
+.Delete-Modal-container {
+    padding: 30px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width:450px;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin-left:-120px;
+}
+
+.Del-R-title{
+    color: goldenrod;
+    text-shadow: 0 0 0.5rem goldenrod;
+    font-size: 30px;
+}
+
+.Del-R-text{
+    color: goldenrod;
+    font-size: 20px;
+    text-shadow: 2px 2px 4px rgb(7,23,22);
+}
+
+.Del-R-btn {
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+    color:white;
+    padding:12px;
+    font-size: 20px;
+}
+
+.Del-R-btn2 {
+    background-color: gray;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding:12px;
+    font-size: 20px;
+}
+.Del-R-btn:hover {
+    cursor: pointer;
+    box-shadow: 0 0 1rem white;
+}
+.Del-R-btn2:hover {
+    cursor: pointer;
+    box-shadow: 0 0 1rem white;
+}
+
+.Del-R-text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Del-R-btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
