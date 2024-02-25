@@ -17,7 +17,7 @@ const DeleteReview = ({ reviewId }) => {
         <div className='Delete-Modal-container'>
             <div className='Del-R-text-container'>
                 <h1 className='Del-R-title'>Confirm Delete</h1>
-                <p className='Del-R-text'>Are you sure you want to remove this review?</p>
+                <p className='Del-R-text'>Are you sure you want to delete this review?</p>
             </div>
             <div className='Del-R-btn-container'>
                 <button className='Del-R-btn' onClick={onDelete}>
