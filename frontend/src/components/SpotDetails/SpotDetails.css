@@ -4,16 +4,27 @@
     padding-left: 75px;
 }
 
+.Spot-title {
+    color: goldenrod;
+    font-size: 29px;
+    text-shadow: 2px 2px 4px rgb(7, 23, 22);
+}
+
+.Spot-Location {
+    color: goldenrod;
+    font-size: 19px;
+    text-shadow: 2px 2px 4px goldenrod;
+}
+
 .Image-container {
     display: flex;
     justify-content: center;
-    /* border: solid black; */
     margin: 15px;
 }
 
 .BigImage {
     width: 900px;
-    height: 505px;
+    height: 510px;
     padding: 5px;
 }
 
@@ -31,41 +42,33 @@
 
 .Description-container {
     padding-left: 90px;
+    width: 80%;
 }
 
+.Host {
+    color: goldenrod;
+    font-size: 25px;
+    text-shadow: 2px 2px 4px rgb(7, 23, 22);
+}
 
-.ReviewTitle-container{
+.Paragraph {
+    color: white;
+    text-shadow: 2px 2px 4px black;
+}
+
+.ReviewTitle-container {
     padding-left: 90px;
+    color: goldenrod;
+    text-shadow: 2px 2px 4px black;
 }
 
-.Post-review{
-margin-left: 90px;
+.Post-review {
+    margin-left: 90px;
 }
 
-/* .Reviews-container{
-
+.Review-hr {
+    border-color: rgba(218, 165, 32, 0.5);
 }
-
- */
-
-
-/*
-.Location{
-
-}
-
-.Description-container{
-
-}
-
-.Host{
-
-}
-
-.Paragraph{
-
-} */
-
 
 .PRR-container {
     display: flex;
@@ -78,21 +81,24 @@ margin-left: 90px;
     display: grid;
     grid-template-columns: 2fr 1fr;
     justify-content: center;
-
 }
 
 .Callout-container {
-    border-radius: 5px;
     padding: 15px;
-    border: solid black;
     margin-right: 90px;
+    color: goldenrod
+}
+
+.Details-price {
+    color: white;
+    text-shadow: 2px 2px 4px black;
 }
 
 .Reserve-button {
     width: 100%;
     background-color: goldenrod;
-    color: white;
-    box-shadow: 0 2px 4px;
+    color: rgb(7, 23, 22);
+    box-shadow: 0 0 1rem goldenrod;
     margin: 3px;
     padding: 10px;
     border: none;

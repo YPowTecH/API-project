@@ -62,9 +62,10 @@ function ProfileButton({ user }) {
           <>
             <div className='Menu-container'>
               <div className='login-text'>
-                <div>Username: {user.username}</div>
+                <div className='Username'>Username: {user.username}</div>
                 <div>Hello, {user.firstName}</div>
                 <div>Email: {user.email}</div>
+                <hr className='PF-hr'/>
               {currUser && (
                 <div className='ManageSpots-container'>
                   <Link to='/spots/current' className='Manage-text' onClick={closeSpot}>Manage Spots</Link>

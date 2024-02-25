@@ -1,4 +1,4 @@
-import { useEffect} from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkLoadSpots } from "../../store/spots"
 import { NavLink } from "react-router-dom"
@@ -17,7 +17,7 @@ const ManageSpots = () => {
     const ownerSpots = spotsArray.filter((spot) => spot.ownerId === currUser.id)
     console.log('do i own these', ownerSpots)
 
-    
+
 
     //create new ref for refresh
 
@@ -32,18 +32,18 @@ const ManageSpots = () => {
     return (
         <div className='ManageSpot-container'>
             <div className='Title-container'>
-                <h1>Manage Spots</h1>
-                <button className ='Create-btn'>
-                    <NavLink to='/spots/new' className='Spots'>
+                <h1 className='MS-title'>Manage Spots</h1>
+                {ownerSpots.length === 0 && (<button className='Create-btn'>
+                    <NavLink to='/spots/new' className='Create-btn-text'>
                         Create a New Spot
                     </NavLink>
-                </button>
+                </button>)}
             </div>
 
             <div className='Spots-container'>
                 {ownerSpots.map((spot) => (
                     <div key={spot.id}>
-                        <NavLink className='Nav-container' to={`/spots/${spot.id}`} key={spot.id}>
+                        <NavLink className='MG-Nav-container' to={`/spots/${spot.id}`} key={spot.id}>
                             <div className="Spot-container" title={spot.name} >
                                 <img className='image' src={`${spot.previewImage}`} />
                                 <div className='Review-location-container'>
@@ -53,13 +53,11 @@ const ManageSpots = () => {
                                 <div className="price">{`$${spot.price} night`}</div>
                             </div>
                         </NavLink>
-                        <div className='Btn-container'>
-                            <button>
-                                <NavLink className = 'Update-btn' to={`/spots/${spot.id}/edit`}>Update</NavLink>
-                            </button>
+                        <div className='MG-Btn-container'>
+                            <NavLink className='Update-btn' to={`/spots/${spot.id}/edit`}>Update</NavLink>
                             <OpenModalButton
                                 buttonText='Delete'
-                                className = 'Delete-btn'
+                                className='Delete-btn'
                                 modalComponent={<DeleteSpot spot={spot} />}
                             />
                         </div>

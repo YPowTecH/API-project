@@ -1,54 +1,60 @@
 
-.title{
-    color: goldenrod;
-    text-shadow: 0 0 0.5rem gray;
-    font-size: 45px;
+.Delete-Modal-container {
+    padding: 30px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width:450px;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin-left:-120px;
 }
 
-.text{
-    color: #2F4F4F;
+.Del-R-title{
+    color: goldenrod;
+    text-shadow: 0 0 0.5rem goldenrod;
     font-size: 30px;
 }
 
-.btn {
+.Del-R-text{
+    color: goldenrod;
+    font-size: 20px;
+    text-shadow: 2px 2px 4px rgb(7,23,22);
+}
+
+.Del-R-btn {
     background-color: red;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     color:white;
     padding:12px;
     font-size: 20px;
 }
 
-.btn2 {
+.Del-R-btn2 {
     background-color: gray;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     color: white;
     padding:12px;
     font-size: 20px;
 }
-.btn:hover {
+.Del-R-btn:hover {
     cursor: pointer;
-    box-shadow: 0 0 1rem goldenrod;
+    box-shadow: 0 0 1rem white;
 }
-.btn2:hover {
+.Del-R-btn2:hover {
     cursor: pointer;
-    box-shadow: 0 0 1rem goldenrod;
+    box-shadow: 0 0 1rem white;
 }
 
-.Delete-Modal-container {
-    padding: 30px;
-
-}
-
-.text-container {
+.Del-R-text-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.btn-container {
+.Del-R-btn-container {
     display: flex;
     flex-direction: column;
     gap: 10px;

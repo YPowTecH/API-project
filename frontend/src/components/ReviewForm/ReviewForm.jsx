@@ -43,6 +43,7 @@ const ReviewForm = ({ spotId }) => {
             <h1 className='title'>How was your stay?</h1>
             {"message" in validations && <p>{validations.message}</p>}
             <textarea
+            className='review-textarea'
                 type='text'
                 name='review'
                 value={review}

@@ -15,15 +15,15 @@ const DeleteReview = ({ reviewId }) => {
 
     return (
         <div className='Delete-Modal-container'>
-            <div className='text-container'>
-                <h1 className='title'>Confirm Delete</h1>
-                <p className='text'>Are you sure you want to remove this review?</p>
+            <div className='Del-R-text-container'>
+                <h1 className='Del-R-title'>Confirm Delete</h1>
+                <p className='Del-R-text'>Are you sure you want to remove this review?</p>
             </div>
-            <div className='btn-container'>
-                <button className='btn' onClick={onDelete}>
+            <div className='Del-R-btn-container'>
+                <button className='Del-R-btn' onClick={onDelete}>
                     Yes (Delete Review)
                 </button>
-                <button className='btn2' onClick={closeModal}>
+                <button className='Del-R-btn2' onClick={closeModal}>
                     No (Keep Review)
                 </button>
             </div>

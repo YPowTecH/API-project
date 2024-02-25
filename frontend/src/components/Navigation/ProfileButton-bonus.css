@@ -25,6 +25,10 @@
 
 }
 
+.PF-hr {
+    border-color: rgba(165, 165, 165, 0.5)
+}
+
 .Login-Signup-container {
     list-style-type: none;
     width: fit-content;

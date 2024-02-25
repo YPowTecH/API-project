@@ -1,5 +1,3 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from "redux-thunk";
 import { csrfFetch } from './csrf';
 
 //Constant
@@ -144,14 +142,16 @@ export const thunkUpdateSpot = (updatedSpot, spotId) => async (dispatch) => {
     })
 
     if (response.ok) {
-        dispatch(updateSpot(spotId))
+        const editedSpot= await response.json()
+        dispatch(updateSpot(editedSpot))
+        return editedSpot
     } else {
         const error = await response.json()
         return error
     }
 }
 
-export const thunkUpdateImage = (updatedSpot, images) => async (dispatch) => {
+export const thunkUpdateImage = (spotId, images) => async (dispatch) => {
     const imgArray = []
     for (let image of images) {
         const response = await csrfFetch(`/api/spots/${spotId}/images`, {

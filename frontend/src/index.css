@@ -1,6 +1,6 @@
 /* TODO: Add sitewide styles */
 body {
-    background-image: url('../public/images/background.png');
+    background-image: url('../images/background.png');
     /* background-size: cover; */
     background-repeat: no-repeat;
     font-family: 'EB Garamond', serif;

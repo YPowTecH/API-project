@@ -4,11 +4,29 @@
 
 .No-review{
     margin-left: 45px;
+    color: white;
+    text-shadow: 2px 2px 4px goldenrod;
 }
 
 .Review-line {
-    border-top: 1px solid #ccc;
+    border-color: rgba(165, 165, 165, 0.5);
+    width: 1500px;
     margin: 10px 0;
 }
 
+.Review-Name{
+    color: white;
+}
 
+/* .Review-Date{
+
+} */
+
+.date-month{
+ color: goldenrod;
+ text-shadow: 2px 2px 4px goldenrod;
+}
+
+.Review-content{
+    color:white;
+}

@@ -67,8 +67,8 @@ function SpotDetails() {
     return (
         <>
             <div className='Header-container'>
-                <h2>{spot?.name}</h2>
-                <div className='Location'>
+                <h2 className='Spot-title'>{spot?.name}</h2>
+                <div className='Spot-Location'>
                     <p>{spot?.city}, {spot?.state}, {spot?.country}</p>
                 </div>
             </div>
@@ -91,7 +91,7 @@ function SpotDetails() {
                 </div>
                 <div className='Callout-container'>
                     <div className='PRR-container'>
-                        <div className='price'><span style={{ fontSize: '1.5em' }}>${spot.price}</span> night</div>
+                        <div className='Details-price'><span style={{ fontSize: '1.5em' }}>${spot.price}</span> night</div>
                         <div>
                             ★{spot.avgStarRating > 0 ? spot.avgStarRating.toFixed(1) : 'New'}
                             {spot.numReviews > 0 && ` · ${spot.numReviews} ${spot.numReviews === 1 ? 'Review' : 'Reviews'}`}
@@ -103,7 +103,7 @@ function SpotDetails() {
                 </div>
             </div>
 
-
+            <hr className='Review-hr'/>
             <div className='ReviewTitle-container'>
                 <h2>
                     ★{spot.avgStarRating > 0 ? spot.avgStarRating.toFixed(1) : 'New'}

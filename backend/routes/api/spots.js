@@ -418,8 +418,6 @@ router.get('/:spotId', async (req, res) => {
     spot.setDataValue('SpotImages', imgurl)
     spot.setDataValue('Owner', owner)
 
-
-
     res.json(spot)
 })
 
